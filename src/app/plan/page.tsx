@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { TrendingUp, BookOpen, Shield, Server, Leaf, Heart, CheckCircle2 } from "lucide-react";
-import { policyDatabase, PolicySector } from "@/data/policyData";
+import { policyDatabase } from "@/data/policyData";
 
 export default function PlanPage() {
   const [selectedSlug, setSelectedSlug] = useState("economy");
@@ -40,13 +40,14 @@ export default function PlanPage() {
             textTransform: "uppercase",
             letterSpacing: "2px",
             color: "var(--primary)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           Manifesto Details
         </span>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 900,
             color: "var(--text-primary)",
@@ -57,7 +58,7 @@ export default function PlanPage() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "16px",
             color: "var(--text-secondary)",
             maxWidth: "600px",
@@ -106,7 +107,7 @@ export default function PlanPage() {
                   background: isSelected ? "var(--primary)" : "var(--bg-secondary)",
                   color: isSelected ? "#ffffff" : "var(--text-primary)",
                   cursor: "pointer",
-                  fontFamily: "var(--font-outfit), sans-serif",
+                  fontFamily: "var(--font-playfair), serif",
                   fontWeight: 700,
                   fontSize: "15px",
                   textAlign: "left",
@@ -160,7 +161,7 @@ export default function PlanPage() {
             <div>
               <h2
                 style={{
-                  fontFamily: "var(--font-outfit), sans-serif",
+                  fontFamily: "var(--font-playfair), serif",
                   fontSize: "24px",
                   fontWeight: 800,
                   color: "var(--text-primary)",
@@ -170,7 +171,7 @@ export default function PlanPage() {
               </h2>
               <p
                 style={{
-                  fontFamily: "var(--font-inter), sans-serif",
+                  fontFamily: "var(--font-jakarta), sans-serif",
                   fontSize: "13px",
                   color: "var(--primary-light)",
                   fontWeight: 600,
@@ -184,7 +185,7 @@ export default function PlanPage() {
 
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "15px",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
@@ -202,7 +203,7 @@ export default function PlanPage() {
               <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 <h3
                   style={{
-                    fontFamily: "var(--font-outfit), sans-serif",
+                    fontFamily: "var(--font-playfair), serif",
                     fontSize: "18px",
                     fontWeight: 700,
                     color: "var(--text-primary)",
@@ -225,7 +226,7 @@ export default function PlanPage() {
                         display: "flex",
                         alignItems: "flex-start",
                         gap: "12px",
-                        fontFamily: "var(--font-inter), sans-serif",
+                        fontFamily: "var(--font-jakarta), sans-serif",
                         fontSize: "14px",
                         color: "var(--text-secondary)",
                         lineHeight: 1.5,

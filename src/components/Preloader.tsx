@@ -104,7 +104,7 @@ export default function Preloader() {
 
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), sans-serif",
             fontSize: "24px",
             fontWeight: 700,
             letterSpacing: "2px",
@@ -116,7 +116,7 @@ export default function Preloader() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "12px",
             letterSpacing: "4px",
             color: "#eab308",
@@ -156,7 +156,7 @@ export default function Preloader() {
             display: "flex",
             justifyContent: "space-between",
             width: "100%",
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "12px",
             color: "rgba(255, 255, 255, 0.6)",
             fontWeight: 500,

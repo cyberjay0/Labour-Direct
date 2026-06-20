@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, DollarSign, Users, Award, Shield } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { stateDatabase } from "@/data/stateData";
 
 export default function GetInvolvedPage() {
@@ -53,13 +53,14 @@ export default function GetInvolvedPage() {
             textTransform: "uppercase",
             letterSpacing: "2px",
             color: "var(--primary)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           Join the Movement
         </span>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 900,
             color: "var(--text-primary)",
@@ -70,7 +71,7 @@ export default function GetInvolvedPage() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "16px",
             color: "var(--text-secondary)",
             maxWidth: "600px",
@@ -105,7 +106,7 @@ export default function GetInvolvedPage() {
           <div>
             <h2
               style={{
-                fontFamily: "var(--font-outfit), sans-serif",
+                fontFamily: "var(--font-playfair), serif",
                 fontSize: "22px",
                 fontWeight: 800,
                 color: "var(--text-primary)",
@@ -115,7 +116,7 @@ export default function GetInvolvedPage() {
             </h2>
             <p
               style={{
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "13.5px",
                 color: "var(--text-secondary)",
                 marginTop: "4px",
@@ -150,12 +151,12 @@ export default function GetInvolvedPage() {
               >
                 <CheckCircle2 size={36} />
               </div>
-              <h3 style={{ fontFamily: "var(--font-outfit), sans-serif", fontSize: "20px", fontWeight: 700 }}>
+              <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "20px", fontWeight: 700 }}>
                 Registration Received!
               </h3>
               <p
                 style={{
-                  fontFamily: "var(--font-inter), sans-serif",
+                  fontFamily: "var(--font-jakarta), sans-serif",
                   fontSize: "14px",
                   color: "var(--text-secondary)",
                   maxWidth: "320px",
@@ -169,7 +170,7 @@ export default function GetInvolvedPage() {
             <form onSubmit={handleVolunteerSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {/* Name */}
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <label style={{ fontSize: "13px", fontWeight: 600 }}>Your Full Name</label>
+                <label style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>Your Full Name</label>
                 <input
                   type="text"
                   required
@@ -184,13 +185,14 @@ export default function GetInvolvedPage() {
                     color: "var(--text-primary)",
                     fontSize: "14px",
                     outline: "none",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                   }}
                 />
               </div>
 
               {/* Email */}
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <label style={{ fontSize: "13px", fontWeight: 600 }}>Email Address</label>
+                <label style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>Email Address</label>
                 <input
                   type="email"
                   required
@@ -205,13 +207,14 @@ export default function GetInvolvedPage() {
                     color: "var(--text-primary)",
                     fontSize: "14px",
                     outline: "none",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                   }}
                 />
               </div>
 
               {/* State */}
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <label style={{ fontSize: "13px", fontWeight: 600 }}>State of Residence</label>
+                <label style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>State of Residence</label>
                 <select
                   value={volunteerState}
                   onChange={(e) => setVolunteerState(e.target.value)}
@@ -223,6 +226,7 @@ export default function GetInvolvedPage() {
                     color: "var(--text-primary)",
                     fontSize: "14px",
                     outline: "none",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                   }}
                 >
                   {Object.values(stateDatabase).map((state) => (
@@ -235,7 +239,7 @@ export default function GetInvolvedPage() {
 
               {/* Volunteer Area */}
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <label style={{ fontSize: "13px", fontWeight: 600 }}>Volunteering Area</label>
+                <label style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>Volunteering Area</label>
                 <select
                   value={volunteerArea}
                   onChange={(e) => setVolunteerArea(e.target.value)}
@@ -247,6 +251,7 @@ export default function GetInvolvedPage() {
                     color: "var(--text-primary)",
                     fontSize: "14px",
                     outline: "none",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                   }}
                 >
                   {volunteerAreas.map((area) => (
@@ -277,7 +282,7 @@ export default function GetInvolvedPage() {
           <div>
             <h2
               style={{
-                fontFamily: "var(--font-outfit), sans-serif",
+                fontFamily: "var(--font-playfair), serif",
                 fontSize: "22px",
                 fontWeight: 800,
                 color: "var(--text-primary)",
@@ -287,7 +292,7 @@ export default function GetInvolvedPage() {
             </h2>
             <p
               style={{
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "13.5px",
                 color: "var(--text-secondary)",
                 marginTop: "4px",
@@ -299,7 +304,7 @@ export default function GetInvolvedPage() {
 
           {/* Preset Buttons */}
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <span style={{ fontSize: "13px", fontWeight: 600 }}>Choose Preset Contribution:</span>
+            <span style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>Choose Preset Contribution:</span>
             <div
               style={{
                 display: "grid",
@@ -329,7 +334,7 @@ export default function GetInvolvedPage() {
                       border: "1px solid var(--card-border)",
                       background: isActive ? "var(--primary)" : "var(--bg-tertiary)",
                       color: isActive ? "#ffffff" : "var(--text-primary)",
-                      fontFamily: "var(--font-inter), sans-serif",
+                      fontFamily: "var(--font-jakarta), sans-serif",
                       fontWeight: 700,
                       fontSize: "14px",
                       cursor: "pointer",
@@ -346,9 +351,9 @@ export default function GetInvolvedPage() {
           {/* Custom Slider Input */}
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "13px", fontWeight: 600 }}>Or Specify Custom Amount (₦):</span>
+              <span style={{ fontSize: "13px", fontWeight: 600, fontFamily: "var(--font-jakarta), sans-serif" }}>Or Specify Custom Amount (₦):</span>
               {customDonation && (
-                <span style={{ fontSize: "14px", fontWeight: "bold", color: "var(--primary-light)" }}>
+                <span style={{ fontSize: "14px", fontWeight: "bold", color: "var(--primary-light)", fontFamily: "var(--font-jakarta), sans-serif" }}>
                   Custom Amount
                 </span>
               )}
@@ -371,7 +376,7 @@ export default function GetInvolvedPage() {
                 color: "var(--text-primary)",
                 fontSize: "14px",
                 outline: "none",
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
               }}
             />
           </div>
@@ -395,13 +400,14 @@ export default function GetInvolvedPage() {
                 letterSpacing: "1px",
                 fontWeight: 700,
                 color: "var(--primary)",
+                fontFamily: "var(--font-jakarta), sans-serif",
               }}
             >
               Donation Impact
             </span>
             <div
               style={{
-                fontFamily: "var(--font-outfit), sans-serif",
+                fontFamily: "var(--font-playfair), serif",
                 fontSize: "24px",
                 fontWeight: 800,
                 color: "var(--text-primary)",
@@ -411,7 +417,7 @@ export default function GetInvolvedPage() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "13.5px",
                 color: "var(--text-secondary)",
                 lineHeight: 1.4,

@@ -71,54 +71,18 @@ export default function Navbar() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
               textDecoration: "none",
-              color: "inherit",
             }}
           >
-            <div
+            <img
+              src="/logo.png"
+              alt="Labour Direct Logo"
               style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                backgroundColor: "var(--primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                fontWeight: "bold",
-                fontSize: "18px",
+                height: "42px",
+                width: "auto",
+                objectFit: "contain",
               }}
-            >
-              TA
-            </div>
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-outfit), sans-serif",
-                  fontSize: "18px",
-                  fontWeight: 800,
-                  lineHeight: 1.1,
-                  letterSpacing: "0.5px",
-                  color: "var(--text-primary)",
-                  textTransform: "uppercase",
-                }}
-              >
-                Tunde Abiola
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-inter), sans-serif",
-                  fontSize: "9px",
-                  fontWeight: 600,
-                  letterSpacing: "1.5px",
-                  color: "var(--accent)",
-                  textTransform: "uppercase",
-                }}
-              >
-                For President 2027
-              </div>
-            </div>
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -137,7 +101,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   style={{
-                    fontFamily: "var(--font-inter), sans-serif",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                     fontSize: "14px",
                     fontWeight: isActive ? 600 : 500,
                     textDecoration: "none",
@@ -268,7 +232,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
-                    fontFamily: "var(--font-outfit), sans-serif",
+                    fontFamily: "var(--font-playfair), sans-serif",
                     fontSize: "24px",
                     fontWeight: 700,
                     textDecoration: "none",

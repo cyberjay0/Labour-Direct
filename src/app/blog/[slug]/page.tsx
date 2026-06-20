@@ -14,10 +14,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     return (
       <div className="container" style={{ padding: "80px 24px", textAlign: "center" }}>
-        <h1 style={{ fontFamily: "var(--font-outfit), sans-serif", fontSize: "36px", fontWeight: 800, marginBottom: "16px" }}>
+        <h1 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "36px", fontWeight: 800, marginBottom: "16px" }}>
           Article Not Found
         </h1>
-        <p style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "16px", color: "var(--text-secondary)", marginBottom: "32px" }}>
+        <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "16px", color: "var(--text-secondary)", marginBottom: "32px" }}>
           We could not find the blog post you are looking for.
         </p>
         <Link href="/blog" className="btn-primary">
@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           display: "inline-flex",
           alignItems: "center",
           gap: "8px",
-          fontFamily: "var(--font-inter), sans-serif",
+          fontFamily: "var(--font-jakarta), sans-serif",
           fontSize: "14px",
           fontWeight: 600,
           color: "var(--primary)",
@@ -81,6 +81,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             padding: "6px 12px",
             borderRadius: "20px",
             backdropFilter: "blur(4px)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           {post.category} Campaign News
@@ -91,7 +92,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "24px" }}>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(28px, 4vw, 42px)",
             fontWeight: 900,
             lineHeight: 1.15,
@@ -110,7 +111,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             color: "var(--text-muted)",
             borderBottom: "1px solid var(--navbar-border)",
             paddingBottom: "20px",
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -130,7 +131,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Article Content body paragraphs */}
       <div
         style={{
-          fontFamily: "var(--font-inter), sans-serif",
+          fontFamily: "var(--font-jakarta), sans-serif",
           fontSize: "16px",
           color: "var(--text-secondary)",
           lineHeight: 1.8,

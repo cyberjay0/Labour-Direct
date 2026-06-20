@@ -33,13 +33,14 @@ export default function AboutPage() {
             textTransform: "uppercase",
             letterSpacing: "2px",
             color: "var(--primary)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           Meet the Candidate
         </span>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 900,
             color: "var(--text-primary)",
@@ -50,7 +51,7 @@ export default function AboutPage() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "16px",
             color: "var(--text-secondary)",
             maxWidth: "600px",
@@ -116,7 +117,7 @@ export default function AboutPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
           <h2
             style={{
-              fontFamily: "var(--font-outfit), sans-serif",
+              fontFamily: "var(--font-playfair), serif",
               fontSize: "28px",
               fontWeight: 800,
               color: "var(--text-primary)",
@@ -126,7 +127,7 @@ export default function AboutPage() {
           </h2>
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "15px",
               color: "var(--text-secondary)",
               lineHeight: 1.7,
@@ -138,7 +139,7 @@ export default function AboutPage() {
           </p>
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "15px",
               color: "var(--text-secondary)",
               lineHeight: 1.7,
@@ -150,7 +151,7 @@ export default function AboutPage() {
           </p>
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "15px",
               color: "var(--text-secondary)",
               lineHeight: 1.7,
@@ -167,7 +168,7 @@ export default function AboutPage() {
       <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
         <h3
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "24px",
             fontWeight: 800,
             color: "var(--text-primary)",
@@ -211,7 +212,7 @@ export default function AboutPage() {
               </div>
               <h4
                 style={{
-                  fontFamily: "var(--font-outfit), sans-serif",
+                  fontFamily: "var(--font-playfair), serif",
                   fontSize: "18px",
                   fontWeight: 700,
                   color: "var(--text-primary)",
@@ -221,7 +222,7 @@ export default function AboutPage() {
               </h4>
               <p
                 style={{
-                  fontFamily: "var(--font-inter), sans-serif",
+                  fontFamily: "var(--font-jakarta), sans-serif",
                   fontSize: "14px",
                   color: "var(--text-secondary)",
                   lineHeight: 1.5,
@@ -252,7 +253,7 @@ export default function AboutPage() {
       >
         <h3
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "28px",
             fontWeight: 800,
           }}
@@ -261,7 +262,7 @@ export default function AboutPage() {
         </h3>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "15px",
             color: "rgba(255, 255, 255, 0.8)",
             maxWidth: "540px",

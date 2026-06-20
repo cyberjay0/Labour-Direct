@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, BookOpen, TrendingUp, Shield, Server, Filter } from "lucide-react";
-import { blogDatabase, BlogPost } from "@/data/blogData";
+import { blogDatabase } from "@/data/blogData";
 import { stateDatabase } from "@/data/stateData";
 
 function BlogListContent() {
@@ -68,7 +68,7 @@ function BlogListContent() {
                 background: activeCategory === cat ? "var(--primary)" : "var(--bg-tertiary)",
                 color: activeCategory === cat ? "#ffffff" : "var(--text-primary)",
                 cursor: "pointer",
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "13px",
                 fontWeight: 600,
                 transition: "all 0.2s",
@@ -86,7 +86,7 @@ function BlogListContent() {
               display: "flex",
               alignItems: "center",
               gap: "6px",
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "13px",
               fontWeight: 600,
               color: "var(--text-secondary)",
@@ -103,7 +103,7 @@ function BlogListContent() {
               border: "1px solid var(--card-border)",
               background: "var(--bg-tertiary)",
               color: "var(--text-primary)",
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "13px",
               outline: "none",
               cursor: "pointer",
@@ -190,11 +190,12 @@ function BlogListContent() {
                         borderRadius: "20px",
                         backdropFilter: "blur(4px)",
                         textTransform: "uppercase",
+                        fontFamily: "var(--font-jakarta), sans-serif",
                       }}
                     >
                       {post.category}
                     </span>
-                    <span style={{ fontSize: "11px", fontWeight: 500 }}>{post.readTime}</span>
+                    <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>{post.readTime}</span>
                   </div>
 
                   <div style={{ opacity: 0.15, position: "absolute", right: "20px", bottom: "10px" }}>
@@ -208,7 +209,7 @@ function BlogListContent() {
                   </div>
 
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9 }}>{post.date}</span>
+                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif" }}>{post.date}</span>
                     {focusState && (
                       <span
                         style={{
@@ -238,7 +239,7 @@ function BlogListContent() {
                 >
                   <h3
                     style={{
-                      fontFamily: "var(--font-outfit), sans-serif",
+                      fontFamily: "var(--font-playfair), serif",
                       fontSize: "18px",
                       fontWeight: 700,
                       lineHeight: 1.3,
@@ -249,7 +250,7 @@ function BlogListContent() {
                   </h3>
                   <p
                     style={{
-                      fontFamily: "var(--font-inter), sans-serif",
+                      fontFamily: "var(--font-jakarta), sans-serif",
                       fontSize: "13.5px",
                       color: "var(--text-secondary)",
                       lineHeight: 1.5,
@@ -269,6 +270,7 @@ function BlogListContent() {
                       color: "var(--primary)",
                       textDecoration: "none",
                       marginTop: "8px",
+                      fontFamily: "var(--font-jakarta), sans-serif",
                     }}
                   >
                     Read Full Story <ArrowRight size={14} />
@@ -290,10 +292,10 @@ function BlogListContent() {
             gap: "16px",
           }}
         >
-          <h3 style={{ fontFamily: "var(--font-outfit), sans-serif", fontSize: "20px", fontWeight: 700 }}>
+          <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "20px", fontWeight: 700 }}>
             No Articles Found
           </h3>
-          <p style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "14px", color: "var(--text-secondary)", maxWidth: "360px" }}>
+          <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "14px", color: "var(--text-secondary)", maxWidth: "360px" }}>
             We could not find any updates matching the selected category and state filters.
           </p>
           <button onClick={handleClearFilters} className="btn-primary" style={{ padding: "10px 18px", fontSize: "13px" }}>
@@ -317,13 +319,14 @@ export default function BlogPage() {
             textTransform: "uppercase",
             letterSpacing: "2px",
             color: "var(--primary)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           Campaign Hub
         </span>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 900,
             color: "var(--text-primary)",
@@ -334,7 +337,7 @@ export default function BlogPage() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "16px",
             color: "var(--text-secondary)",
             maxWidth: "600px",

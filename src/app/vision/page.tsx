@@ -54,13 +54,14 @@ export default function VisionPage() {
             textTransform: "uppercase",
             letterSpacing: "2px",
             color: "var(--primary)",
+            fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
           Our Agenda
         </span>
         <h1
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "clamp(32px, 5vw, 48px)",
             fontWeight: 900,
             color: "var(--text-primary)",
@@ -71,7 +72,7 @@ export default function VisionPage() {
         </h1>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "16px",
             color: "var(--text-secondary)",
             maxWidth: "600px",
@@ -118,7 +119,7 @@ export default function VisionPage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "var(--font-outfit), sans-serif",
+                  fontFamily: "var(--font-playfair), serif",
                   fontSize: "18px",
                   fontWeight: 800,
                   color: "var(--text-primary)",
@@ -128,7 +129,7 @@ export default function VisionPage() {
               </h3>
               <h4
                 style={{
-                  fontFamily: "var(--font-inter), sans-serif",
+                  fontFamily: "var(--font-jakarta), sans-serif",
                   fontSize: "13px",
                   fontWeight: 600,
                   color: "var(--primary-light)",
@@ -140,7 +141,7 @@ export default function VisionPage() {
             </div>
             <p
               style={{
-                fontFamily: "var(--font-inter), sans-serif",
+                fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "14px",
                 color: "var(--text-secondary)",
                 lineHeight: 1.5,
@@ -165,7 +166,7 @@ export default function VisionPage() {
       >
         <h3
           style={{
-            fontFamily: "var(--font-outfit), sans-serif",
+            fontFamily: "var(--font-playfair), serif",
             fontSize: "24px",
             fontWeight: 800,
             color: "var(--text-primary)",
@@ -175,7 +176,7 @@ export default function VisionPage() {
         </h3>
         <p
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "15px",
             color: "var(--text-secondary)",
             lineHeight: 1.6,

@@ -38,36 +38,20 @@ export default function Footer() {
       >
         {/* Campaign Info */}
         <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-            <div
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "16px" }}>
+            <img
+              src="/logo.png"
+              alt="Labour Direct Logo"
               style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                backgroundColor: "var(--primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                fontWeight: "bold",
+                height: "38px",
+                width: "auto",
+                objectFit: "contain",
               }}
-            >
-              TA
-            </div>
-            <span
-              style={{
-                fontFamily: "var(--font-outfit), sans-serif",
-                fontSize: "20px",
-                fontWeight: 800,
-                color: "var(--text-primary)",
-              }}
-            >
-              TUNDE ABIOLA
-            </span>
+            />
           </div>
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "14px",
               color: "var(--text-secondary)",
               marginBottom: "24px",
@@ -82,7 +66,7 @@ export default function Footer() {
         <div>
           <h3
             style={{
-              fontFamily: "var(--font-outfit), sans-serif",
+              fontFamily: "var(--font-playfair), sans-serif",
               fontSize: "16px",
               fontWeight: 700,
               color: "var(--text-primary)",
@@ -105,7 +89,7 @@ export default function Footer() {
                 <Link
                   href={link.href}
                   style={{
-                    fontFamily: "var(--font-inter), sans-serif",
+                    fontFamily: "var(--font-jakarta), sans-serif",
                     fontSize: "14px",
                     color: "var(--text-secondary)",
                     textDecoration: "none",
@@ -125,7 +109,7 @@ export default function Footer() {
         <div>
           <h3
             style={{
-              fontFamily: "var(--font-outfit), sans-serif",
+              fontFamily: "var(--font-playfair), sans-serif",
               fontSize: "16px",
               fontWeight: 700,
               color: "var(--text-primary)",
@@ -138,7 +122,7 @@ export default function Footer() {
           </h3>
           <p
             style={{
-              fontFamily: "var(--font-inter), sans-serif",
+              fontFamily: "var(--font-jakarta), sans-serif",
               fontSize: "14px",
               color: "var(--text-secondary)",
               marginBottom: "16px",
@@ -185,7 +169,7 @@ export default function Footer() {
                   background: "var(--bg-tertiary)",
                   color: "var(--text-primary)",
                   fontSize: "14px",
-                  fontFamily: "var(--font-inter), sans-serif",
+                  fontFamily: "var(--font-jakarta), sans-serif",
                   outline: "none",
                 }}
               />
@@ -227,7 +211,7 @@ export default function Footer() {
       >
         <span
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "12px",
             color: "var(--text-muted)",
           }}
@@ -236,7 +220,7 @@ export default function Footer() {
         </span>
         <span
           style={{
-            fontFamily: "var(--font-inter), sans-serif",
+            fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "12px",
             color: "var(--text-muted)",
           }}
