@@ -128,17 +128,31 @@ export default function Map3D() {
   const handleMouseMove = (e: React.MouseEvent) => { if (isDragging) onDragMove(e.clientX, e.clientY); };
   const handleMouseUp = () => setIsDragging(false);
 
+  const touchMovedRef = useRef(false);
+
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
+    touchMovedRef.current = false;
     const t = e.touches[0];
     dragStartRef.current = { x: t.clientX, y: t.clientY, rotX: rotateXRef.current, rotZ: rotateZRef.current };
   };
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
     const t = e.touches[0];
+    const dx = Math.abs(t.clientX - dragStartRef.current.x);
+    const dy = Math.abs(t.clientY - dragStartRef.current.y);
+    if (dx > 8 || dy > 8) touchMovedRef.current = true;
     onDragMove(t.clientX, t.clientY);
   };
-  const handleTouchEnd = () => setIsDragging(false);
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setIsDragging(false);
+    // If finger barely moved, treat it as a tap → find and click the state
+    if (!touchMovedRef.current) {
+      const touch = e.changedTouches[0];
+      const el = document.elementFromPoint(touch.clientX, touch.clientY) as SVGPathElement | null;
+      if (el && el.id) handleStateClick(el.id);
+    }
+  };
 
   // Zoom helpers — apply smoothly
   const handleZoomIn = () => {
@@ -540,14 +554,14 @@ export default function Map3D() {
       <div
         style={{
           overflow: "hidden",
-          maxHeight: panelVisible && !isFullscreen ? "600px" : "0px",
+          maxHeight: panelVisible && !isFullscreen ? "800px" : "0px",
           opacity: panelVisible && !isFullscreen ? 1 : 0,
-          transition: "max-height 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease",
+          transition: "max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease",
         }}
       >
         {selectedState && !isFullscreen && (
-          <div style={{ paddingTop: "8px" }}>
-            <StatePanel state={selectedState} onClose={closePanel} />
+          <div style={{ paddingTop: "12px" }}>
+            <StatePanel state={selectedState} onClose={closePanel} inline />
           </div>
         )}
       </div>
@@ -575,7 +589,7 @@ export default function Map3D() {
 }
 
 // ── Self-contained State Info Drawer Panel ──
-function StatePanel({ state, onClose }: { state: StateData; onClose: () => void }) {
+function StatePanel({ state, onClose, inline = false }: { state: StateData; onClose: () => void; inline?: boolean }) {
   const CATEGORY_CONFIG: Record<string, { color: string; label: string }> = {
     "high-impact": { color: "#22c55e", label: "High Impact Initiative" },
     "active-project": { color: "#eab308", label: "Active Project" },
@@ -586,11 +600,11 @@ function StatePanel({ state, onClose }: { state: StateData; onClose: () => void 
     <div
       className="glass-card"
       style={{
-        height: "100%",
+        height: inline ? "auto" : "100%",
         display: "flex",
         flexDirection: "column",
         padding: "0",
-        overflow: "hidden",
+        overflow: inline ? "visible" : "hidden",
         border: "1px solid var(--card-border)",
         boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
         borderRadius: "20px",
@@ -684,8 +698,16 @@ function StatePanel({ state, onClose }: { state: StateData; onClose: () => void 
         </p>
       </div>
 
-      {/* Initiatives list — scrollable */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: "12px" }}>
+      {/* Initiatives list — scrollable in drawer, auto-height inline */}
+      <div style={{
+        flex: inline ? undefined : 1,
+        overflowY: inline ? "visible" : "auto",
+        maxHeight: inline ? undefined : undefined,
+        padding: "16px 20px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px",
+      }}>
         {state.initiatives.map((init, i) => {
           const cfg = CATEGORY_CONFIG[init.category] || CATEGORY_CONFIG["high-impact"];
           return (
