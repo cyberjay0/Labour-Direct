@@ -149,16 +149,28 @@ export default function Map3D() {
       }}
     >
       <div
-        className="map-3d-container"
+        className="map-float-wrapper"
         style={{
           width: "100%",
           height: "100%",
-          maxWidth: isFullscreen ? "1000px" : "600px",
-          maxHeight: isFullscreen ? "800px" : "480px",
-          transform: `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg) scale(${zoom})`,
-          transition: isDragging ? "none" : "transform 0.3s ease-out",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transformStyle: "preserve-3d",
+          animation: isDragging ? "none" : "mapFloat 8s ease-in-out infinite",
         }}
       >
+        <div
+          className="map-3d-container"
+          style={{
+            width: "100%",
+            height: "100%",
+            maxWidth: isFullscreen ? "1000px" : "600px",
+            maxHeight: isFullscreen ? "800px" : "480px",
+            transform: `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg) scale(${zoom})`,
+            transition: isDragging ? "none" : "transform 0.3s ease-out",
+          }}
+        >
         {/* Layer 1: Shadow Backdrop (Lowest) */}
         <div className="map-layer map-layer-shadow" style={{ transform: "translateZ(-24px)" }}>
           <svg viewBox={nigeriaMap.viewBox} className="map-svg">
@@ -303,6 +315,7 @@ export default function Map3D() {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );
@@ -812,6 +825,14 @@ export default function Map3D() {
       )}
 
       <style jsx global>{`
+        @keyframes mapFloat {
+          0%, 100% {
+            transform: translateY(0px) rotateX(0deg);
+          }
+          50% {
+            transform: translateY(-8px) rotateX(0.5deg) rotateY(-0.5deg);
+          }
+        }
         @keyframes fadeInUp {
           from {
             opacity: 0;
