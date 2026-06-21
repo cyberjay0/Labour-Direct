@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const playfair = Playfair_Display({
+const playfair = Lora({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const jakarta = DM_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -22,6 +22,12 @@ export const metadata: Metadata = {
   description: "Official campaign website of Tunde Abiola. Explore our policies on economy, education, and infrastructure, and view state by state updates.",
   keywords: ["Tunde Abiola", "President 2027", "Nigeria Campaign", "Nigeria Policy", "Kano State", "Lagos State"],
   authors: [{ name: "Tunde Abiola Campaign" }],
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

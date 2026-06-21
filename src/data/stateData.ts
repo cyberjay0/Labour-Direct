@@ -142,8 +142,8 @@ export const stateDatabase: Record<string, StateData> = {
       { category: "listening", title: "Nsukka Youth Agricultural Cooperative", description: "Fostering agribusiness management workshops for recent graduates." }
     ]
   },
-  "federal-capital-territory": {
-    id: "federal-capital-territory",
+  "fct": {
+    id: "fct",
     name: "Federal Capital Territory",
     summary: "Driving national administrative modernization and green urban transport.",
     initiatives: [
@@ -242,8 +242,8 @@ export const stateDatabase: Record<string, StateData> = {
       { category: "listening", title: "Ikeja Small Business Forum", description: "Gathering merchant feedback on local regulatory compliance fees." }
     ]
   },
-  nasarawa: {
-    id: "nasarawa",
+  nassarawa: {
+    id: "nassarawa",
     name: "Nasarawa",
     summary: "Scaling mineral processing centers and agricultural value addition.",
     initiatives: [

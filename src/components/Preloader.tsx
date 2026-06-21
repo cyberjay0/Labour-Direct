@@ -31,10 +31,10 @@ export default function Preloader() {
         }
         
         // Fast at first, slows down towards the end
-        const increment = Math.max(1, Math.floor((100 - prev) * 0.15));
+        const increment = Math.max(1, Math.floor((100 - prev) * 0.08));
         return prev + increment;
       });
-    }, 45);
+    }, 70);
 
     return () => clearInterval(interval);
   }, []);
@@ -49,8 +49,8 @@ export default function Preloader() {
         left: 0,
         width: "100%",
         height: "100%",
-        backgroundColor: "#0a4d2f", // Core campaign dark green
-        color: "#ffffff",
+        backgroundColor: "#ffffff", // Pure white background
+        color: "var(--text-primary)",
         zIndex: 99999,
         display: "flex",
         flexDirection: "column",
@@ -80,7 +80,7 @@ export default function Preloader() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: "24px",
+            marginBottom: "32px",
             animation: "logoFloat 3s ease-in-out infinite",
           }}
         >
@@ -91,7 +91,7 @@ export default function Preloader() {
               width: "100px",
               height: "100px",
               borderRadius: "50%",
-              backgroundColor: "rgba(234, 179, 8, 0.15)",
+              backgroundColor: "rgba(10, 77, 47, 0.06)",
               filter: "blur(20px)",
               animation: "logoGlow 3s ease-in-out infinite",
             }}
@@ -100,7 +100,7 @@ export default function Preloader() {
             src="/logo.png"
             alt="Labour Direct Logo"
             style={{
-              height: "90px",
+              height: "100px",
               width: "auto",
               objectFit: "contain",
               position: "relative",
@@ -109,38 +109,12 @@ export default function Preloader() {
           />
         </div>
 
-        <h1
-          style={{
-            fontFamily: "var(--font-playfair), sans-serif",
-            fontSize: "24px",
-            fontWeight: 700,
-            letterSpacing: "2px",
-            marginBottom: "8px",
-            color: "#ffffff",
-          }}
-        >
-          TUNDE ABIOLA
-        </h1>
-        <p
-          style={{
-            fontFamily: "var(--font-jakarta), sans-serif",
-            fontSize: "12px",
-            letterSpacing: "4px",
-            color: "#eab308",
-            marginBottom: "40px",
-            textTransform: "uppercase",
-            fontWeight: 600,
-          }}
-        >
-          For President 2027
-        </p>
-
         {/* Loading Progress Bar */}
         <div
           style={{
             width: "100%",
             height: "4px",
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backgroundColor: "rgba(var(--brand-red-rgb), 0.08)", // Light brand red track
             borderRadius: "2px",
             overflow: "hidden",
             marginBottom: "16px",
@@ -151,7 +125,7 @@ export default function Preloader() {
             style={{
               height: "100%",
               width: `${progress}%`,
-              backgroundColor: "#eab308", // Gold progress bar
+              background: "linear-gradient(90deg, var(--accent) 0%, var(--brand-red) 100%)", // Brand gold-to-red gradient bar
               borderRadius: "2px",
               transition: "width 0.1s ease-out",
             }}
@@ -165,12 +139,12 @@ export default function Preloader() {
             width: "100%",
             fontFamily: "var(--font-jakarta), sans-serif",
             fontSize: "12px",
-            color: "rgba(255, 255, 255, 0.6)",
+            color: "var(--text-muted)",
             fontWeight: 500,
           }}
         >
           <span>Building a Nigeria for All</span>
-          <span style={{ color: "#eab308", fontWeight: "bold" }}>{progress}%</span>
+          <span style={{ color: "var(--brand-red)", fontWeight: "bold" }}>{progress}%</span>
         </div>
       </div>
 

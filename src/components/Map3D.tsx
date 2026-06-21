@@ -6,6 +6,27 @@ import { ZoomIn, ZoomOut, RotateCcw, Compass, Minimize2, Maximize2, CheckCircle2
 import nigeriaMap from "@svg-maps/nigeria";
 import { stateDatabase, StateData } from "@/data/stateData";
 
+// Visual coordinates adjustments to keep labels/pins centered inside irregular state polygons
+const labelOffsets: Record<string, { x: number; y: number }> = {
+  kogi: { x: -8, y: 15 },
+  niger: { x: 5, y: -8 },
+  "cross-river": { x: -10, y: 8 },
+  rivers: { x: 0, y: -10 },
+  bayelsa: { x: 6, y: -12 },
+  delta: { x: -12, y: -4 },
+  oyo: { x: 12, y: 8 },
+  kebbi: { x: 12, y: 8 },
+  fct: { x: 2, y: -2 },
+  nassarawa: { x: 6, y: -6 },
+  lagos: { x: 2, y: -6 },
+  anambra: { x: -6, y: 2 },
+  imo: { x: 4, y: 4 },
+  abia: { x: 6, y: -2 },
+  enugu: { x: 2, y: -4 },
+  ebonyi: { x: 4, y: -2 },
+  "akwa-ibom": { x: 0, y: -8 }
+};
+
 export default function Map3D() {
   const [selectedState, setSelectedState] = useState<StateData | null>(null);
   const [hoveredStateId, setHoveredStateId] = useState<string | null>(null);
@@ -87,9 +108,9 @@ export default function Map3D() {
     const deltaX = e.clientX - dragStart.x;
     const deltaY = e.clientY - dragStart.y;
     
-    // Rotation speed factor
+    // Rotation speed factor (inverted Z rotation for natural dragging)
     const speed = 0.45;
-    setRotateZ(rotateStart.z + deltaX * speed);
+    setRotateZ(rotateStart.z - deltaX * speed);
     // Clamp tilt angle between 25 and 75 degrees
     setRotateX(Math.min(Math.max(rotateStart.x - deltaY * speed, 25), 75));
   };
@@ -113,7 +134,7 @@ export default function Map3D() {
     const deltaY = touch.clientY - dragStart.y;
     
     const speed = 0.45;
-    setRotateZ(rotateStart.z + deltaX * speed);
+    setRotateZ(rotateStart.z - deltaX * speed);
     setRotateX(Math.min(Math.max(rotateStart.x - deltaY * speed, 25), 75));
   };
 
@@ -164,10 +185,9 @@ export default function Map3D() {
           className="map-3d-container"
           style={{
             aspectRatio: "744 / 600",
-            width: isFullscreen ? "85vw" : "100%",
+            width: isFullscreen ? "min(85vw, 99.2vh)" : "100%",
+            height: isFullscreen ? "min(68.5vw, 80vh)" : "auto",
             maxWidth: isFullscreen ? "1200px" : "600px",
-            maxHeight: isFullscreen ? "80vh" : "480px",
-            height: "auto",
             transform: `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg) scale(${zoom})`,
             transition: isDragging ? "none" : "transform 0.3s ease-out",
           }}
@@ -262,13 +282,17 @@ export default function Map3D() {
           if (primaryInit.category === "active-project") pinColorClass = "map-pin-yellow";
           if (primaryInit.category === "listening") pinColorClass = "map-pin-blue";
 
+          const offset = labelOffsets[id] || { x: 0, y: 0 };
+          const posX = coords.x + offset.x;
+          const posY = coords.y + offset.y;
+
           return (
             <div
               key={`pin-${id}`}
               className="map-pin"
               style={{
-                left: `${(coords.x / 744) * 100}%`,
-                top: `${(coords.y / 600) * 100}%`,
+                left: `${(posX / 744) * 100}%`,
+                top: `${(posY / 600) * 100}%`,
                 transform: `translate3d(-50%, -50%, ${hoveredStateId === id ? "12px" : "4px"})`,
               }}
               onClick={() => handleStateClick(id)}
@@ -287,13 +311,17 @@ export default function Map3D() {
           const stateData = stateDatabase[id];
           if (!stateData) return null;
 
+          const offset = labelOffsets[id] || { x: 0, y: 0 };
+          const posX = coords.x + offset.x;
+          const posY = coords.y + offset.y;
+
           return (
             <div
               key={`lbl-${id}`}
               style={{
                 position: "absolute",
-                left: `${(coords.x / 744) * 100}%`,
-                top: `${(coords.y / 600) * 100}%`,
+                left: `${(posX / 744) * 100}%`,
+                top: `${(posY / 600) * 100}%`,
                 // Counter-rotate the label back to billboard flat against the screen
                 transform: `translate3d(-50%, -50%, 14px) rotateZ(${-rotateZ}deg) rotateX(${-rotateX}deg)`,
                 transformStyle: "preserve-3d",

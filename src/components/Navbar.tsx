@@ -8,12 +8,24 @@ import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react";
 export default function Navbar() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
     // Initial theme check
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "dark" : "light");
+
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -61,8 +73,8 @@ export default function Navbar() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "12px 24px",
-            height: "72px",
+            padding: "12px 28px",
+            height: "84px",
           }}
         >
           {/* Logo Branding */}
@@ -78,7 +90,7 @@ export default function Navbar() {
               src="/logo.png"
               alt="Labour Direct Logo"
               style={{
-                height: "54px",
+                height: "62px",
                 width: "auto",
                 objectFit: "contain",
               }}
@@ -196,6 +208,19 @@ export default function Navbar() {
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+          {/* Scroll progress indicator bar */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: `${scrollProgress}%`,
+              height: "2.5px",
+              background: "linear-gradient(90deg, var(--accent) 0%, var(--brand-red) 100%)",
+              borderRadius: "0 0 16px 16px",
+              transition: "width 0.1s ease-out",
+            }}
+          />
         </div>
       </header>
 

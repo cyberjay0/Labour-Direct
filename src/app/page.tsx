@@ -1,13 +1,68 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, TrendingUp, Shield, Server, User } from "lucide-react";
 import Map3D from "@/components/Map3D";
 import { blogDatabase } from "@/data/blogData";
 
+// Helper component for viewport scroll reveal animations
+function ScrollReveal({ children, delay = "0ms" }: { children: React.ReactNode; delay?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}`,
+        width: "100%",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Home() {
   // Get the first 3 blog posts for the homepage grid
   const recentPosts = blogDatabase.slice(0, 3);
+
+  // Mouse position state for 3D Hero Parallax tilt
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    setMousePos({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
 
   const pillars = [
     {
@@ -34,24 +89,32 @@ export default function Home() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "80px" }}>
-      {/* Hero Section */}
+      {/* Hero Section with mouse tracking */}
       <section
-        className="container"
+        className="container bg-dot-grid"
+        ref={heroRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         style={{
           position: "relative",
-          overflow: "visible",
+          overflow: "hidden",
           background: "radial-gradient(circle at 10% 20%, rgba(10, 77, 47, 0.04) 0%, transparent 60%), radial-gradient(circle at 90% 80%, rgba(234, 179, 8, 0.03) 0%, transparent 60%)",
           borderRadius: "24px",
+          border: "1px solid var(--card-border)",
         }}
       >
+        {/* Animated Background Mesh Glow Blobs */}
+        <div className="ambient-glow-blob" style={{ top: "-10%", left: "-5%", width: "300px", height: "300px", background: "rgba(16, 185, 129, 0.18)" }} />
+        <div className="ambient-glow-blob" style={{ bottom: "10%", right: "-5%", width: "250px", height: "250px", background: "rgba(234, 179, 8, 0.12)", animationDelay: "-5s" }} />
+
         {/* Large Decorative Gear Logo Watermark */}
         <div
           style={{
             position: "absolute",
             top: "5%",
-            left: "-60px",
-            width: "480px",
-            height: "480px",
+            left: "-20px",
+            width: "min(480px, 90%)",
+            height: "min(480px, 90%)",
             opacity: 0.02,
             pointerEvents: "none",
             color: "var(--primary)",
@@ -93,9 +156,9 @@ export default function Home() {
               }}
             >
               <span
-                style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--accent)" }}
+                style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--brand-red)" }}
               />
-              Latest from Labour Direct
+              Government with GPS
             </span>
             <h1
               className="animate-fade-in-up"
@@ -108,9 +171,9 @@ export default function Home() {
                 animationDelay: "200ms",
               }}
             >
-              Building a Nigeria <br />
-              <span style={{ color: "var(--primary)", display: "inline-block", position: "relative" }}>
-                That Works for All
+              Labour Direct Platform <br />
+              <span className="text-gradient-brand" style={{ display: "inline-block", position: "relative" }}>
+                Ready on Day One
                 <span
                   style={{
                     position: "absolute",
@@ -118,7 +181,7 @@ export default function Home() {
                     left: 0,
                     width: "100%",
                     height: "4px",
-                    backgroundColor: "rgba(234, 179, 8, 0.3)",
+                    backgroundColor: "rgba(var(--brand-red-rgb), 0.15)",
                     borderRadius: "2px",
                     zIndex: -1,
                   }}
@@ -136,7 +199,7 @@ export default function Home() {
                 animationDelay: "300ms",
               }}
             >
-              Ideas, updates, and reflections on our journey to a stronger, united and prosperous Nigeria.
+              Labour Direct is a cross sector digital platform that integrates policy and infrastructure planning for every sector of the Nigerian economy. It is a ready made system any government can adopt on Day One instead of starting from scratch.
             </p>
 
             {/* Premium Stat Panel */}
@@ -144,26 +207,50 @@ export default function Home() {
               className="animate-fade-in-up"
               style={{
                 display: "flex",
-                gap: "32px",
+                flexWrap: "wrap",
+                gap: "20px",
                 marginTop: "12px",
                 marginBottom: "12px",
                 borderTop: "1px solid var(--card-border)",
                 paddingTop: "24px",
-                maxWidth: "500px",
+                maxWidth: "100%",
                 animationDelay: "400ms",
               }}
             >
-              <div>
-                <div style={{ fontSize: "24px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>36</div>
+              <div style={{ minWidth: "80px" }}>
+                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>36</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>States Engaged</div>
               </div>
-              <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "32px" }}>
-                <div style={{ fontSize: "24px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>100+</div>
+              <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "20px", minWidth: "100px" }}>
+                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>100+</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>Planned Initiatives</div>
               </div>
-              <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "32px" }}>
-                <div style={{ fontSize: "24px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>1</div>
+              <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "20px", minWidth: "100px" }}>
+                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>1</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>Unified Movement</div>
+              </div>
+            </div>
+
+            {/* Value Props checklist */}
+            <div
+              className="animate-fade-in-up"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "16px",
+                marginTop: "4px",
+                marginBottom: "12px",
+                animationDelay: "450ms",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
+                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more lost projects
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
+                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more conflicting plans
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
+                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more wasted years
               </div>
             </div>
 
@@ -180,18 +267,29 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Image Profile — Staggered Double Frame */}
+          {/* Hero Image Profile — Staggered Double Frame with interactive 3D parallax tilt */}
           <div
             className="animate-fade-in-up"
             style={{
               position: "relative",
               justifySelf: "center",
               width: "100%",
-              maxWidth: "400px",
+              maxWidth: "min(400px, calc(100vw - 80px))",
               height: "420px",
               animationDelay: "300ms",
+              transform: `perspective(1000px) rotateY(${mousePos.x * 8}deg) rotateX(${-mousePos.y * 8}deg)`,
+              transformStyle: "preserve-3d",
+              transition: "transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)",
             }}
           >
+            {/* Ambient Portrait Aura */}
+            <div
+              className="portrait-glow-backing"
+              style={{
+                transform: "translate3d(0, 0, -20px)",
+              }}
+            />
+
             {/* Offset Gold Backdrop Frame */}
             <div
               className="hero-gold-frame-animated"
@@ -199,12 +297,14 @@ export default function Home() {
                 position: "absolute",
                 top: "16px",
                 left: "16px",
-                width: "100%",
-                height: "100%",
+                width: "calc(100% - 16px)",
+                height: "calc(100% - 16px)",
                 borderRadius: "24px",
                 border: "2.5px solid var(--accent)",
                 zIndex: 0,
                 pointerEvents: "none",
+                transform: `translate3d(${-mousePos.x * 12}px, ${-mousePos.y * 12}px, -12px)`,
+                transition: "transform 0.15s cubic-bezier(0.25, 1, 0.5, 1)",
               }}
             />
             {/* Top Primary Portrait Frame */}
@@ -244,63 +344,80 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Overlapping Pillars Banner */}
-        <div
-          className="glass-card"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "24px",
-            padding: "32px",
-            marginTop: "20px",
-            position: "relative",
-            zIndex: 3,
-          }}
-        >
-          {pillars.map((p, idx) => (
-            <div key={idx} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-              <div
-                style={{
-                  padding: "10px",
-                  borderRadius: "10px",
-                  backgroundColor: "rgba(10, 77, 47, 0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {p.icon}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <h3
+        {/* Overlapping Pillars Banner with Scroll Reveal */}
+        <ScrollReveal delay="100ms">
+          <div
+            className="glass-card glass-card-glow"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "24px",
+              padding: "32px",
+              marginTop: "20px",
+              position: "relative",
+              zIndex: 3,
+            }}
+          >
+            {/* Decorative Gradient Line Top */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "10%",
+                right: "10%",
+                height: "2px",
+                background: "linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%)",
+              }}
+            />
+
+            {pillars.map((p, idx) => (
+              <div key={idx} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+                <div
+                  className="pillar-icon-wrapper"
                   style={{
-                    fontFamily: "var(--font-playfair), serif",
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    color: "var(--text-primary)",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    backgroundColor: "rgba(10, 77, 47, 0.08)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "transform 0.3s ease, background-color 0.3s ease",
                   }}
                 >
-                  {p.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-jakarta), sans-serif",
-                    fontSize: "12px",
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {p.description}
-                </p>
+                  {p.icon}
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-playfair), serif",
+                      fontSize: "16px",
+                      fontWeight: 700,
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-jakarta), sans-serif",
+                      fontSize: "12px",
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {p.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Latest Articles Section */}
       <section style={{ backgroundColor: "var(--bg-tertiary)", padding: "80px 0", transition: "background-color 0.3s" }}>
-        <div className="container" style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+        <ScrollReveal>
+          <div className="container" style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
           {/* Header row */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px" }}>
             <div>
@@ -325,7 +442,7 @@ export default function Home() {
                   marginTop: "4px",
                 }}
               >
-                Latest Articles & Updates
+                Latest <span className="text-gradient-brand">Articles & Updates</span>
               </h2>
             </div>
             <Link
@@ -351,7 +468,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
               gap: "24px",
             }}
           >
@@ -367,7 +484,7 @@ export default function Home() {
               return (
                 <article
                   key={post.slug}
-                  className="glass-card"
+                  className="glass-card glass-card-glow"
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -375,21 +492,65 @@ export default function Home() {
                     height: "100%",
                   }}
                 >
-                  {/* Card Media Area (Fallback design gradient box) */}
+                  {/* Card Media Area */}
                   <div
                     style={{
                       height: "200px",
-                      background: gradient,
+                      position: "relative",
+                      overflow: "hidden",
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
                       padding: "20px",
-                      position: "relative",
                       color: "#ffffff",
                     }}
                   >
+                    {/* Background Image */}
+                    {post.imageUrl ? (
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          zIndex: 0,
+                          transition: "transform 0.5s ease",
+                        }}
+                        className="card-media-image"
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          background: gradient,
+                          zIndex: 0,
+                        }}
+                      />
+                    )}
+
+                    {/* Gradient Overlay for Text Legibility */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
+                        zIndex: 1,
+                      }}
+                    />
+
                     {/* Floating pill tags */}
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
                       <span
                         style={{
                           fontSize: "10px",
@@ -408,7 +569,7 @@ export default function Home() {
                     </div>
 
                     {/* Central Icon representation */}
-                    <div style={{ opacity: 0.15, position: "absolute", right: "20px", bottom: "10px" }}>
+                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
                       {post.category === "Education" ? (
                         <BookOpen size={96} />
                       ) : post.category === "Infrastructure" ? (
@@ -418,8 +579,9 @@ export default function Home() {
                       )}
                     </div>
 
-                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif" }}>{post.date}</span>
+                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>{post.date}</span>
                   </div>
+
 
                   {/* Card Content Area */}
                   <div
@@ -477,19 +639,37 @@ export default function Home() {
             })}
           </div>
         </div>
-      </section>
+      </ScrollReveal>
+    </section>
 
       {/* Map Section */}
-      <section className="container" style={{ padding: "40px 0 80px 0" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "48px",
-            alignItems: "center",
-          }}
-          className="map-grid"
-        >
+      <section
+        className="container bg-dot-grid"
+        style={{
+          padding: "60px 24px 80px 24px",
+          position: "relative",
+          overflow: "visible",
+          borderRadius: "24px",
+          backgroundColor: "rgba(var(--primary-rgb), 0.015)",
+          border: "1px solid var(--card-border)",
+        }}
+      >
+        {/* Map Section Ambient Glows */}
+        <div className="ambient-glow-blob" style={{ bottom: "-10%", left: "-10%", width: "350px", height: "350px", background: "rgba(16, 185, 129, 0.12)" }} />
+        <div className="ambient-glow-blob" style={{ top: "10%", right: "-5%", width: "250px", height: "250px", background: "rgba(234, 179, 8, 0.08)", animationDelay: "-7s" }} />
+
+        <ScrollReveal>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "48px",
+              alignItems: "center",
+              position: "relative",
+              zIndex: 2,
+            }}
+            className="map-grid"
+          >
           {/* Instructions Left Side */}
           <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <span
@@ -514,7 +694,7 @@ export default function Home() {
               }}
             >
               A Nationwide Movement <br />
-              <span style={{ color: "var(--primary)" }}>for Real Change</span>
+              <span className="text-gradient-brand">for Real Change</span>
             </h2>
             <p
               style={{
@@ -627,6 +807,7 @@ export default function Home() {
             <Map3D />
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* Media Queries Layout adjustments */}
