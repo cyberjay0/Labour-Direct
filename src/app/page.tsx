@@ -172,20 +172,8 @@ export default function Home() {
               }}
             >
               Labour Direct Platform <br />
-              <span className="text-gradient-brand" style={{ display: "inline-block", position: "relative" }}>
+              <span className="text-gradient-brand">
                 Ready on Day One
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: "4px",
-                    left: 0,
-                    width: "100%",
-                    height: "4px",
-                    backgroundColor: "rgba(var(--brand-red-rgb), 0.15)",
-                    borderRadius: "2px",
-                    zIndex: -1,
-                  }}
-                />
               </span>
             </h1>
             <p
