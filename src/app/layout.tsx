@@ -18,10 +18,42 @@ const jakarta = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Tunde Abiola for President 2027: Building a Nigeria for All",
-  description: "Official campaign website of Tunde Abiola. Explore our policies on economy, education, and infrastructure, and view state by state updates.",
-  keywords: ["Tunde Abiola", "President 2027", "Nigeria Campaign", "Nigeria Policy", "Kano State", "Lagos State"],
-  authors: [{ name: "Tunde Abiola Campaign" }],
+  title: "Labour Direct — Government with GPS. Ready on Day One.",
+  description:
+    "Labour Direct is a cross-sector digital platform that integrates policy and infrastructure planning for every sector of the Nigerian economy. A ready-made system any government can adopt on Day One — instead of starting from scratch. No more lost projects. No more conflicting plans. No more wasted years.",
+  keywords: [
+    "Labour Direct",
+    "Nigeria digital platform",
+    "policy planning Nigeria",
+    "infrastructure planning",
+    "Nigerian economy",
+    "government platform Nigeria",
+    "Day One government",
+  ],
+  authors: [{ name: "Labour Direct" }],
+  openGraph: {
+    type: "website",
+    url: "https://www.labourdirect.com",
+    siteName: "Labour Direct",
+    title: "Labour Direct — Government with GPS. Ready on Day One.",
+    description:
+      "A cross-sector digital platform that integrates policy and infrastructure planning for every sector of the Nigerian economy. Any government can adopt it on Day One.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Labour Direct — Government with GPS",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Labour Direct — Government with GPS. Ready on Day One.",
+    description:
+      "A cross-sector digital platform integrating policy and infrastructure planning for every sector of the Nigerian economy.",
+    images: ["/og-image.png"],
+  },
 };
 
 export const viewport = {
