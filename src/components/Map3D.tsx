@@ -144,7 +144,7 @@ export default function Map3D() {
         userSelect: "none",
         touchAction: "none",
         width: "100%",
-        height: isFullscreen ? "70vh" : "500px",
+        height: isFullscreen ? "80vh" : "500px",
         overflow: "visible",
       }}
     >
@@ -163,10 +163,11 @@ export default function Map3D() {
         <div
           className="map-3d-container"
           style={{
-            width: "100%",
-            height: "100%",
-            maxWidth: isFullscreen ? "1000px" : "600px",
-            maxHeight: isFullscreen ? "800px" : "480px",
+            aspectRatio: "744 / 600",
+            width: isFullscreen ? "85vw" : "100%",
+            maxWidth: isFullscreen ? "1200px" : "600px",
+            maxHeight: isFullscreen ? "80vh" : "480px",
+            height: "auto",
             transform: `rotateX(${rotateX}deg) rotateZ(${rotateZ}deg) scale(${zoom})`,
             transition: isDragging ? "none" : "transform 0.3s ease-out",
           }}
@@ -297,13 +298,13 @@ export default function Map3D() {
                 transform: `translate3d(-50%, -50%, 14px) rotateZ(${-rotateZ}deg) rotateX(${-rotateX}deg)`,
                 transformStyle: "preserve-3d",
                 pointerEvents: "none",
-                fontSize: "9px",
+                fontSize: "8.5px",
                 fontWeight: 800,
                 color: "var(--text-primary)",
                 backgroundColor: "var(--card-bg)",
                 border: "1px solid var(--card-border)",
-                padding: "2px 6px",
-                borderRadius: "4px",
+                padding: "1px 4px",
+                borderRadius: "3px",
                 whiteSpace: "nowrap",
                 boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
                 letterSpacing: "0.5px",
@@ -311,7 +312,7 @@ export default function Map3D() {
                 transition: isDragging ? "none" : "transform 0.3s ease-out",
               }}
             >
-              {stateData.name}
+              {stateData.name === "Federal Capital Territory" ? "FCT" : stateData.name}
             </div>
           );
         })}

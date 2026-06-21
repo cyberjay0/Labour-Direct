@@ -71,35 +71,42 @@ export default function Preloader() {
           textAlign: "center",
         }}
       >
-        {/* Stylized Campaign Emblem Icon */}
+        {/* Labour Direct Brand Logo */}
         <div
           style={{
-            width: "80px",
-            height: "80px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
-            border: "2px solid #eab308", // Presidential gold border
+            position: "relative",
+            width: "120px",
+            height: "120px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             marginBottom: "24px",
-            animation: "emblemPulse 2s infinite ease-in-out",
+            animation: "logoFloat 3s ease-in-out infinite",
           }}
         >
-          <svg
-            width="44"
-            height="44"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#eab308"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-            <path d="M2 17l10 5 10-5" />
-            <path d="M2 12l10 5 10-5" />
-          </svg>
+          {/* Glowing background behind logo */}
+          <div
+            style={{
+              position: "absolute",
+              width: "100px",
+              height: "100px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(234, 179, 8, 0.15)",
+              filter: "blur(20px)",
+              animation: "logoGlow 3s ease-in-out infinite",
+            }}
+          />
+          <img
+            src="/logo.png"
+            alt="Labour Direct Logo"
+            style={{
+              height: "90px",
+              width: "auto",
+              objectFit: "contain",
+              position: "relative",
+              zIndex: 1,
+            }}
+          />
         </div>
 
         <h1
@@ -168,14 +175,22 @@ export default function Preloader() {
       </div>
 
       <style jsx global>{`
-        @keyframes emblemPulse {
+        @keyframes logoFloat {
           0%, 100% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+            transform: translateY(0px) scale(1);
           }
           50% {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px 8px rgba(234, 179, 8, 0.2);
+            transform: translateY(-8px) scale(1.04);
+          }
+        }
+        @keyframes logoGlow {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 0.9;
+            transform: scale(1.1);
           }
         }
       `}</style>

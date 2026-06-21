@@ -199,8 +199,9 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .glass-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(var(--primary-rgb), 0.2);
+  transform: translateY(-6px);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 25px rgba(var(--accent-rgb), 0.08);
 }
 
 /* 3D Map Perspective Containers */
@@ -357,4 +358,62 @@ body {
 @keyframes fadeOutPreloader {
   0% { opacity: 1; visibility: visible; }
   100% { opacity: 0; visibility: hidden; }
+}
+
+/* Custom Premium Animations & Hover Sheen System */
+
+/* 1. Staggered Entrance Animations */
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUpReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Hero Golden Frame floating/bobbing parallax */
+@keyframes goldFrameFloat {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(8px, 8px);
+  }
+}
+.hero-gold-frame-animated {
+  animation: goldFrameFloat 6s ease-in-out infinite;
+}
+
+/* 3. Button Sheen Shine effect */
+.btn-primary, .btn-accent {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after, .btn-accent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: none;
+}
+.btn-primary:hover::after, .btn-accent:hover::after {
+  left: 150%;
+  transition: left 0.8s ease-in-out;
 }

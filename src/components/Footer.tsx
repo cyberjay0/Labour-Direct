@@ -43,7 +43,7 @@ export default function Footer() {
               src="/logo.png"
               alt="Labour Direct Logo"
               style={{
-                height: "38px",
+                height: "48px",
                 width: "auto",
                 objectFit: "contain",
               }}

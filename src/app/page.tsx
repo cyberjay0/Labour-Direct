@@ -78,6 +78,7 @@ export default function Home() {
           {/* Hero Copy */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <span
+              className="animate-fade-in-up"
               style={{
                 fontSize: "12px",
                 fontWeight: 700,
@@ -88,6 +89,7 @@ export default function Home() {
                 alignItems: "center",
                 gap: "8px",
                 fontFamily: "var(--font-jakarta), sans-serif",
+                animationDelay: "100ms",
               }}
             >
               <span
@@ -96,12 +98,14 @@ export default function Home() {
               Latest from Labour Direct
             </span>
             <h1
+              className="animate-fade-in-up"
               style={{
                 fontFamily: "var(--font-playfair), serif",
                 fontSize: "clamp(36px, 5vw, 56px)",
                 fontWeight: 900,
                 lineHeight: 1.1,
                 color: "var(--text-primary)",
+                animationDelay: "200ms",
               }}
             >
               Building a Nigeria <br />
@@ -122,12 +126,14 @@ export default function Home() {
               </span>
             </h1>
             <p
+              className="animate-fade-in-up"
               style={{
                 fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "clamp(15px, 2vw, 17px)",
                 color: "var(--text-secondary)",
                 lineHeight: 1.6,
                 maxWidth: "520px",
+                animationDelay: "300ms",
               }}
             >
               Ideas, updates, and reflections on our journey to a stronger, united and prosperous Nigeria.
@@ -135,6 +141,7 @@ export default function Home() {
 
             {/* Premium Stat Panel */}
             <div
+              className="animate-fade-in-up"
               style={{
                 display: "flex",
                 gap: "32px",
@@ -143,6 +150,7 @@ export default function Home() {
                 borderTop: "1px solid var(--card-border)",
                 paddingTop: "24px",
                 maxWidth: "500px",
+                animationDelay: "400ms",
               }}
             >
               <div>
@@ -159,7 +167,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginTop: "8px" }}>
+            <div 
+              className="animate-fade-in-up"
+              style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginTop: "8px", animationDelay: "500ms" }}
+            >
               <Link href="/blog" className="btn-primary">
                 Read Our Latest Posts <ArrowRight size={18} />
               </Link>
@@ -171,16 +182,19 @@ export default function Home() {
 
           {/* Hero Image Profile — Staggered Double Frame */}
           <div
+            className="animate-fade-in-up"
             style={{
               position: "relative",
               justifySelf: "center",
               width: "100%",
               maxWidth: "400px",
               height: "420px",
+              animationDelay: "300ms",
             }}
           >
             {/* Offset Gold Backdrop Frame */}
             <div
+              className="hero-gold-frame-animated"
               style={{
                 position: "absolute",
                 top: "16px",

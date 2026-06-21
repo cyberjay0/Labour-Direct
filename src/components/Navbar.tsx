@@ -78,7 +78,7 @@ export default function Navbar() {
               src="/logo.png"
               alt="Labour Direct Logo"
               style={{
-                height: "42px",
+                height: "54px",
                 width: "auto",
                 objectFit: "contain",
               }}
