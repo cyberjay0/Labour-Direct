@@ -383,45 +383,369 @@ export default function Home() {
 
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: "24px" }}>
                 {/* Education card */}
-                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
-                  <div style={{ fontSize: "28px" }}>🎓</div>
-                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                    Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
-                  </p>
-                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
-                    Labour Direct cross-references every school with access roads, power supply, and teacher deployment. Statewide. Automatically.
-                  </p>
-                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
-                    See the Education Plan <ArrowRight size={14} />
-                  </Link>
+                <div
+                  className="glass-card glass-card-glow"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    overflow: "hidden",
+                    height: "100%",
+                  }}
+                >
+                  {/* Card Media Area */}
+                  <div
+                    style={{
+                      height: "200px",
+                      position: "relative",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "20px",
+                      color: "#ffffff",
+                    }}
+                  >
+                    <img
+                      src="/blog/education.jpg"
+                      alt="Education Sector Plan"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        zIndex: 0,
+                        transition: "transform 0.5s ease",
+                      }}
+                      className="card-media-image"
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
+                        zIndex: 1,
+                      }}
+                    />
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          padding: "4px 10px",
+                          borderRadius: "20px",
+                          backdropFilter: "blur(4px)",
+                          textTransform: "uppercase",
+                          fontFamily: "var(--font-jakarta), sans-serif",
+                        }}
+                      >
+                        Education
+                      </span>
+                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
+                    </div>
+                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
+                      <BookOpen size={96} />
+                    </div>
+                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
+                      Labour Direct Module
+                    </span>
+                  </div>
+
+                  {/* Card Content Area */}
+                  <div
+                    style={{
+                      padding: "24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      flexGrow: 1,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        lineHeight: 1.3,
+                        color: "var(--text-primary)",
+                      }}
+                    >
+                      Education & Skills
+                    </h3>
+                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                      Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
+                    </p>
+                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
+                      Labour Direct cross-references every school with access roads, power supply, and teacher deployment. Statewide. Automatically.
+                    </p>
+                    <Link
+                      href="/sectors?sector=education"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: "var(--primary)",
+                        textDecoration: "none",
+                        marginTop: "8px",
+                        fontFamily: "var(--font-jakarta), sans-serif",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                    >
+                      See the Education Plan <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Economy card */}
-                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
-                  <div style={{ fontSize: "28px" }}>📈</div>
-                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                    We set a minimum wage with no data on what it actually costs the national budget.
-                  </p>
-                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
-                    Labour Direct&apos;s budget engine shows instantly: N200k wage equals N1.4 trillion wage bill and a 3% inflation risk. Every sector affected, visible before the announcement.
-                  </p>
-                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
-                    See the Economy Plan <ArrowRight size={14} />
-                  </Link>
+                <div
+                  className="glass-card glass-card-glow"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    overflow: "hidden",
+                    height: "100%",
+                  }}
+                >
+                  {/* Card Media Area */}
+                  <div
+                    style={{
+                      height: "200px",
+                      position: "relative",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "20px",
+                      color: "#ffffff",
+                    }}
+                  >
+                    <img
+                      src="/blog/economy.jpg"
+                      alt="Economy Sector Plan"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        zIndex: 0,
+                        transition: "transform 0.5s ease",
+                      }}
+                      className="card-media-image"
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
+                        zIndex: 1,
+                      }}
+                    />
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          padding: "4px 10px",
+                          borderRadius: "20px",
+                          backdropFilter: "blur(4px)",
+                          textTransform: "uppercase",
+                          fontFamily: "var(--font-jakarta), sans-serif",
+                        }}
+                      >
+                        Economy
+                      </span>
+                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
+                    </div>
+                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
+                      <TrendingUp size={96} />
+                    </div>
+                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
+                      Labour Direct Module
+                    </span>
+                  </div>
+
+                  {/* Card Content Area */}
+                  <div
+                    style={{
+                      padding: "24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      flexGrow: 1,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        lineHeight: 1.3,
+                        color: "var(--text-primary)",
+                      }}
+                    >
+                      Economy & Jobs
+                    </h3>
+                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                      We set a minimum wage with no data on what it actually costs the national budget.
+                    </p>
+                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
+                      Labour Direct&apos;s budget engine shows instantly: N200k wage equals N1.4 trillion wage bill and a 3% inflation risk. Every sector affected, visible before the announcement.
+                    </p>
+                    <Link
+                      href="/sectors?sector=economy"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: "var(--primary)",
+                        textDecoration: "none",
+                        marginTop: "8px",
+                        fontFamily: "var(--font-jakarta), sans-serif",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                    >
+                      See the Economy Plan <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Infrastructure card */}
-                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
-                  <div style={{ fontSize: "28px" }}>🏗</div>
-                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                    Projects start. Contractors disappear. Nothing gets finished.
-                  </p>
-                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
-                    Every Labour Direct project has a digital lifecycle from procurement to delivery. Citizens upload photos. Site abandonment triggers automatic alerts to EFCC and BPP.
-                  </p>
-                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
-                    See the Infrastructure Plan <ArrowRight size={14} />
-                  </Link>
+                <div
+                  className="glass-card glass-card-glow"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    overflow: "hidden",
+                    height: "100%",
+                  }}
+                >
+                  {/* Card Media Area */}
+                  <div
+                    style={{
+                      height: "200px",
+                      position: "relative",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "20px",
+                      color: "#ffffff",
+                    }}
+                  >
+                    <img
+                      src="/blog/infrastructure.jpg"
+                      alt="Infrastructure Sector Plan"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        zIndex: 0,
+                        transition: "transform 0.5s ease",
+                      }}
+                      className="card-media-image"
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
+                        zIndex: 1,
+                      }}
+                    />
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          padding: "4px 10px",
+                          borderRadius: "20px",
+                          backdropFilter: "blur(4px)",
+                          textTransform: "uppercase",
+                          fontFamily: "var(--font-jakarta), sans-serif",
+                        }}
+                      >
+                        Infrastructure
+                      </span>
+                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
+                    </div>
+                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
+                      <Server size={96} />
+                    </div>
+                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
+                      Labour Direct Module
+                    </span>
+                  </div>
+
+                  {/* Card Content Area */}
+                  <div
+                    style={{
+                      padding: "24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      flexGrow: 1,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-playfair), serif",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        lineHeight: 1.3,
+                        color: "var(--text-primary)",
+                      }}
+                    >
+                      Infrastructure & Energy
+                    </h3>
+                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                      Projects start. Contractors disappear. Nothing gets finished.
+                    </p>
+                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
+                      Every Labour Direct project has a digital lifecycle from procurement to delivery. Citizens upload photos. Site abandonment triggers automatic alerts to EFCC and BPP.
+                    </p>
+                    <Link
+                      href="/sectors?sector=infrastructure"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: "var(--primary)",
+                        textDecoration: "none",
+                        marginTop: "8px",
+                        fontFamily: "var(--font-jakarta), sans-serif",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                    >
+                      See the Infrastructure Plan <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { TrendingUp, BookOpen, Shield, Server, Leaf, Heart, CheckCircle2 } from "lucide-react";
 import { policyDatabase } from "@/data/policyData";
 
-export default function SectorsPage() {
+function SectorsContent() {
+  const searchParams = useSearchParams();
   const [selectedSlug, setSelectedSlug] = useState("economy");
+
+  useEffect(() => {
+    const sectorParam = searchParams.get("sector");
+    if (sectorParam && ["economy", "education", "security", "infrastructure", "agriculture", "healthcare"].includes(sectorParam)) {
+      setSelectedSlug(sectorParam);
+    }
+  }, [searchParams]);
 
   const activeSector = policyDatabase.find((p) => p.slug === selectedSlug) || policyDatabase[0];
 
@@ -276,5 +285,13 @@ export default function SectorsPage() {
         }
       `}</style>
     </div>
+  );
+}
+
+export default function SectorsPage() {
+  return (
+    <Suspense fallback={<div className="container" style={{ padding: "80px 24px", textAlign: "center", fontFamily: "var(--font-jakarta), sans-serif", color: "var(--text-secondary)" }}>Loading sector plans...</div>}>
+      <SectorsContent />
+    </Suspense>
   );
 }
