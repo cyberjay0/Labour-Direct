@@ -406,7 +406,7 @@ export default function Home() {
                     }}
                   >
                     <img
-                      src="/blog/education.jpg"
+                      src="/education_policy.png"
                       alt="Education Sector Plan"
                       style={{
                         position: "absolute",
@@ -528,7 +528,7 @@ export default function Home() {
                     }}
                   >
                     <img
-                      src="/blog/economy.jpg"
+                      src="/economy_policy.png"
                       alt="Economy Sector Plan"
                       style={{
                         position: "absolute",
@@ -650,7 +650,7 @@ export default function Home() {
                     }}
                   >
                     <img
-                      src="/blog/infrastructure.jpg"
+                      src="/infrastructure_policy.png"
                       alt="Infrastructure Sector Plan"
                       style={{
                         position: "absolute",
