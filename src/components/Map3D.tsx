@@ -479,39 +479,104 @@ export default function Map3D() {
           <ControlBar fullscreen={false} />
         </div>
 
-        {/* Map + state popup overlay wrapper */}
-        <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden" }}>
-          {/* Only render the normal map when NOT in fullscreen */}
-          {!isFullscreen && (
-            <MapDragWrapper fullscreen={false} containerRef={mapContainerRef as React.RefObject<HTMLDivElement>} />
-          )}
-
-          {/* State popup: absolute overlay centred over the map */}
-          {panelVisible && !isFullscreen && selectedState && (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                zIndex: 20,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: "rgba(0,0,0,0.45)",
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
-                padding: "16px",
-                animation: "fsBackdropIn 0.3s ease-out",
-              }}
-              onClick={closePanel}
-            >
-              <div
-                style={{ width: "min(480px, 100%)", maxHeight: "calc(100% - 32px)", overflowY: "auto" }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <StatePanel state={selectedState} onClose={closePanel} />
-              </div>
+        {/* Map + state popup overlay wrapper with Premium Workspace Frame */}
+        <div
+          className="glass-card map-workspace-frame"
+          style={{
+            position: "relative",
+            borderRadius: "24px",
+            overflow: "hidden",
+            border: "1px solid var(--card-border)",
+            boxShadow: "0 25px 50px -12px rgba(10, 77, 47, 0.08), 0 0 0 1px rgba(10, 77, 47, 0.02)",
+            background: "var(--bg-secondary)",
+            margin: "8px 0 24px 0",
+          }}
+        >
+          {/* Frame Top Header */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "12px 20px",
+              backgroundColor: "rgba(10, 77, 47, 0.03)",
+              borderBottom: "1px solid var(--card-border)",
+              fontSize: "11px",
+              fontWeight: 700,
+              color: "var(--primary)",
+              fontFamily: "var(--font-jakarta), sans-serif",
+              letterSpacing: "0.5px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  backgroundColor: "#16a34a",
+                  boxShadow: "0 0 8px rgba(22, 163, 74, 0.6)",
+                  animation: "pinPulse 2s infinite ease-out",
+                }}
+              />
+              <span>INTERACTIVE 3D ENGINE</span>
             </div>
-          )}
+            <span style={{ fontSize: "10.5px", color: "var(--text-muted)", fontWeight: 500 }} className="fs-subtitle">
+              Drag inside to rotate map
+            </span>
+          </div>
+
+          <div style={{ position: "relative" }}>
+            {/* Only render the normal map when NOT in fullscreen */}
+            {!isFullscreen && (
+              <MapDragWrapper fullscreen={false} containerRef={mapContainerRef as React.RefObject<HTMLDivElement>} />
+            )}
+
+            {/* State popup: absolute overlay centred over the map */}
+            {panelVisible && !isFullscreen && selectedState && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  zIndex: 20,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "rgba(0,0,0,0.45)",
+                  backdropFilter: "blur(6px)",
+                  WebkitBackdropFilter: "blur(6px)",
+                  padding: "16px",
+                  animation: "fsBackdropIn 0.3s ease-out",
+                }}
+                onClick={closePanel}
+              >
+                <div
+                  style={{ width: "min(480px, 100%)", maxHeight: "calc(100% - 32px)", overflowY: "auto" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <StatePanel state={selectedState} onClose={closePanel} />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Frame Bottom Footer */}
+          <div
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "rgba(0, 0, 0, 0.015)",
+              borderTop: "1px solid var(--card-border)",
+              fontSize: "11px",
+              color: "var(--text-secondary)",
+              textAlign: "center",
+              fontFamily: "var(--font-jakarta), sans-serif",
+              fontWeight: 500,
+              lineHeight: 1.4,
+            }}
+          >
+            👋 Swipe in the page gutters <span style={{ fontWeight: 700, color: "var(--brand-red)" }}>(outside this box)</span> to scroll the website.
+          </div>
         </div>
       </div>
 
@@ -745,6 +810,11 @@ export default function Map3D() {
 
           .map-drag-wrapper.panel-active {
             transform: translateY(-16dvh) !important;
+          }
+
+          .map-workspace-frame {
+            margin: 16px 12px 24px 12px !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
           }
         }
       `}</style>
