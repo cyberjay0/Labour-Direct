@@ -29,12 +29,14 @@ const labelOffsets: Record<string, { x: number; y: number }> = {
 export default function Map3D() {
   const [selectedState, setSelectedState] = useState<StateData | null>(null);
   const [panelVisible, setPanelVisible] = useState(false);
-  const [hoveredStateId, setHoveredStateId] = useState<string | null>(null);
   const [centroids, setCentroids] = useState<Record<string, { x: number; y: number }>>({});
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoomState] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const zoomRef = useRef(1);
+  const setZoom = (z: number) => { setZoomState(z); zoomRef.current = z; };
 
   // Rotation lives in refs to avoid re-render lag during drag
   const rotateXRef = useRef(55);
@@ -44,6 +46,15 @@ export default function Map3D() {
   const fsMapContainerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const rafRef = useRef<number | null>(null);
+
+  // Momentum refs
+  const velocityRef = useRef({ vx: 0, vy: 0 });
+  const lastPosRef = useRef({ x: 0, y: 0, time: 0 });
+  const isDraggingRef = useRef(false);
+  const dragDistRef = useRef(0);
+
+  // Tooltip ref for lag-free hover
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   // Track which SVG path the finger started on (for reliable mobile tap)
   const touchedStateRef = useRef<string | null>(null);
@@ -109,54 +120,100 @@ export default function Map3D() {
     if (data) openPanel(data);
   };
 
-  // rAF drag
-  const onDragMove = useCallback((clientX: number, clientY: number) => {
+  // Momentum drag logic
+  const startDrag = (clientX: number, clientY: number) => {
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    dragDistRef.current = 0;
+    dragStartRef.current = { x: clientX, y: clientY, rotX: rotateXRef.current, rotZ: rotateZRef.current };
+    lastPosRef.current = { x: clientX, y: clientY, time: performance.now() };
+    velocityRef.current = { vx: 0, vy: 0 };
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      const dx = clientX - dragStartRef.current.x;
-      const dy = clientY - dragStartRef.current.y;
-      const speed = 0.4;
-      rotateZRef.current = dragStartRef.current.rotZ - dx * speed;
-      rotateXRef.current = Math.min(Math.max(dragStartRef.current.rotX - dy * speed, 20), 80);
-      applyTransform(rotateXRef.current, rotateZRef.current, zoom, true);
-    });
-  }, [zoom, applyTransform]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    dragStartRef.current = { x: e.clientX, y: e.clientY, rotX: rotateXRef.current, rotZ: rotateZRef.current };
   };
-  const handleMouseMove = (e: React.MouseEvent) => { if (isDragging) onDragMove(e.clientX, e.clientY); };
-  const handleMouseUp = () => setIsDragging(false);
 
-  // Touch handlers: per-path touchStart records which state was touched
-  // so we don't rely on elementFromPoint (which breaks under 3D CSS transforms)
+  const moveDrag = (clientX: number, clientY: number) => {
+    if (!isDraggingRef.current) return;
+    const now = performance.now();
+    const dt = Math.max(now - lastPosRef.current.time, 1);
+    
+    dragDistRef.current += Math.abs(clientX - lastPosRef.current.x) + Math.abs(clientY - lastPosRef.current.y);
+
+    velocityRef.current = {
+      vx: (clientX - lastPosRef.current.x) / dt,
+      vy: (clientY - lastPosRef.current.y) / dt,
+    };
+    lastPosRef.current = { x: clientX, y: clientY, time: now };
+
+    const dx = clientX - dragStartRef.current.x;
+    const dy = clientY - dragStartRef.current.y;
+    const speed = 0.4;
+    rotateZRef.current = dragStartRef.current.rotZ - dx * speed;
+    rotateXRef.current = Math.min(Math.max(dragStartRef.current.rotX - dy * speed, 20), 80);
+    applyTransform(rotateXRef.current, rotateZRef.current, zoomRef.current, true);
+  };
+
+  const endDrag = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    setIsDragging(false);
+
+    let lastTime = performance.now();
+    const applyMomentum = () => {
+      if (isDraggingRef.current) return;
+      const now = performance.now();
+      const dt = Math.max(now - lastTime, 1);
+      lastTime = now;
+
+      velocityRef.current.vx *= 0.92; // Friction
+      velocityRef.current.vy *= 0.92;
+
+      if (Math.abs(velocityRef.current.vx) < 0.005 && Math.abs(velocityRef.current.vy) < 0.005) return;
+
+      const speed = 0.4 * dt;
+      rotateZRef.current -= velocityRef.current.vx * speed;
+      rotateXRef.current = Math.min(Math.max(rotateXRef.current - velocityRef.current.vy * speed, 20), 80);
+      
+      applyTransform(rotateXRef.current, rotateZRef.current, zoomRef.current, true);
+      rafRef.current = requestAnimationFrame(applyMomentum);
+    };
+    rafRef.current = requestAnimationFrame(applyMomentum);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => startDrag(e.clientX, e.clientY);
+  const handleMouseMove = (e: React.MouseEvent) => moveDrag(e.clientX, e.clientY);
+  const handleMouseUp = () => endDrag();
+
   const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
     touchMovedRef.current = false;
     touchedStateRef.current = null;
     const t = e.touches[0];
-    dragStartRef.current = { x: t.clientX, y: t.clientY, rotX: rotateXRef.current, rotZ: rotateZRef.current };
+    startDrag(t.clientX, t.clientY);
   };
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
+    if (!isDraggingRef.current) return;
     const t = e.touches[0];
     const dx = Math.abs(t.clientX - dragStartRef.current.x);
     const dy = Math.abs(t.clientY - dragStartRef.current.y);
     if (dx > 8 || dy > 8) touchMovedRef.current = true;
-    onDragMove(t.clientX, t.clientY);
+    moveDrag(t.clientX, t.clientY);
   };
   const handleTouchEnd = () => {
-    setIsDragging(false);
-    // If it was a tap (not a drag) and we recorded which state, open it
+    endDrag();
     if (!touchMovedRef.current && touchedStateRef.current) {
       handleStateClick(touchedStateRef.current);
     }
     touchedStateRef.current = null;
   };
 
-  const handleZoomIn = () => { const z = Math.min(zoom + 0.25, 2.5); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
-  const handleZoomOut = () => { const z = Math.max(zoom - 0.25, 0.6); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
+  const handlePathMouseUp = (locId: string) => {
+    // Only trigger click if it was a genuine click, not a long drag
+    if (dragDistRef.current < 15) {
+      handleStateClick(locId);
+    }
+  };
+
+  const handleZoomIn = () => { const z = Math.min(zoomRef.current + 0.25, 2.5); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
+  const handleZoomOut = () => { const z = Math.max(zoomRef.current - 0.25, 0.6); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
   const handleReset = () => {
     rotateXRef.current = 55; rotateZRef.current = -30;
     setZoom(1); setActiveFilter(null); closePanel();
@@ -184,13 +241,13 @@ export default function Map3D() {
   const MapSVGContent = ({ fullscreen }: { fullscreen: boolean }) => (
     <>
       {/* Shadow Layer */}
-      <div className="map-layer map-layer-shadow" style={{ transform: "translateZ(-24px)" }}>
+      <div className="map-layer map-layer-shadow" style={{ transform: "translateZ(-24px)", pointerEvents: "none" }}>
         <svg viewBox={nigeriaMap.viewBox} className="map-svg">
           {nigeriaMap.locations.map((loc) => <path key={`sh-${loc.id}`} d={loc.path} className="state-path" />)}
         </svg>
       </div>
       {[-16, -12, -8, -4].map((z) => (
-        <div key={z} className="map-layer map-layer-depth" style={{ transform: `translateZ(${z}px)` }}>
+        <div key={z} className="map-layer map-layer-depth" style={{ transform: `translateZ(${z}px)`, pointerEvents: "none" }}>
           <svg viewBox={nigeriaMap.viewBox} className="map-svg">
             {nigeriaMap.locations.map((loc) => <path key={`dp${z}-${loc.id}`} d={loc.path} className="state-path" />)}
           </svg>
@@ -200,7 +257,6 @@ export default function Map3D() {
       <div className="map-layer map-layer-interactive" style={{ transform: "translateZ(0px)" }}>
         <svg viewBox={nigeriaMap.viewBox} className="map-svg" ref={fullscreen ? undefined : svgRef}>
           {nigeriaMap.locations.map((loc) => {
-            const isHovered = hoveredStateId === loc.id;
             const isSelected = selectedState?.id === loc.id;
             const hasFilter = filteredStates.some((s) => s.id === loc.id);
             return (
@@ -208,16 +264,29 @@ export default function Map3D() {
                 key={loc.id}
                 id={loc.id}
                 d={loc.path}
-                className={`state-path ${isSelected ? "state-path-selected" : ""}`}
+                className={`state-path interactive-path ${isSelected ? "state-path-selected" : ""}`}
                 style={{
-                  fill: isSelected ? "var(--map-fill-active)" : isHovered ? "var(--map-fill-hover)" : hasFilter && activeFilter ? "var(--primary-light)" : "var(--map-fill)",
+                  fill: isSelected ? "var(--map-fill-active)" : hasFilter && activeFilter ? "var(--primary-light)" : "var(--map-fill)",
                   opacity: activeFilter && !hasFilter ? 0.3 : 1,
-                  transition: "fill 0.22s ease, opacity 0.3s ease",
-                  filter: isHovered ? "brightness(1.15)" : "none",
                 }}
-                onMouseEnter={() => setHoveredStateId(loc.id)}
-                onMouseLeave={() => setHoveredStateId(null)}
+                onMouseEnter={(e) => {
+                  if (tooltipRef.current) {
+                    const sd = stateDatabase[loc.id];
+                    tooltipRef.current.textContent = sd ? (sd.name === "Federal Capital Territory" ? "FCT" : sd.name) : "";
+                    tooltipRef.current.style.opacity = "1";
+                  }
+                }}
+                onMouseMove={(e) => {
+                  if (tooltipRef.current) {
+                    tooltipRef.current.style.left = `${e.clientX + 15}px`;
+                    tooltipRef.current.style.top = `${e.clientY + 15}px`;
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (tooltipRef.current) tooltipRef.current.style.opacity = "0";
+                }}
                 onClick={() => handleStateClick(loc.id)}
+                onMouseUp={() => handlePathMouseUp(loc.id)}
                 // Record which state was touched so touchEnd can open it reliably
                 onTouchStart={(e) => { touchedStateRef.current = loc.id; e.stopPropagation(); }}
               />
@@ -241,12 +310,10 @@ export default function Map3D() {
             style={{
               left: `${((coords.x + off.x) / 744) * 100}%`,
               top: `${((coords.y + off.y) / 600) * 100}%`,
-              transform: `translate3d(-50%, -50%, ${hoveredStateId === id ? "14px" : "5px"})`,
+              transform: "translate3d(-50%, -50%, 5px)",
               transition: "transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)",
             }}
             onClick={() => handleStateClick(id)}
-            onMouseEnter={() => setHoveredStateId(id)}
-            onMouseLeave={() => setHoveredStateId(null)}
             onTouchStart={() => { touchedStateRef.current = id; }}
           >
             <div className="map-pin-inner" style={{ backgroundColor: pinColor, border: "2.5px solid #fff", width: "12px", height: "12px", borderRadius: "50%", position: "relative" }}>
@@ -291,7 +358,7 @@ export default function Map3D() {
         userSelect: "none",
         touchAction: "none",
         width: "100%",
-        height: fullscreen ? "calc(100vh - 160px)" : "500px",
+        height: fullscreen ? "calc(100dvh - 160px)" : "500px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -305,6 +372,14 @@ export default function Map3D() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onWheel={(e) => {
+        if (!fullscreen) return;
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        const z = Math.min(Math.max(zoomRef.current + delta, 0.6), 3.0);
+        setZoom(z);
+        applyTransform(rotateXRef.current, rotateZRef.current, z);
+      }}
     >
       <div style={{
         width: "100%", height: "100%",
@@ -375,6 +450,28 @@ export default function Map3D() {
 
   return (
     <>
+      {/* Fast DOM Tooltip */}
+      <div
+        ref={tooltipRef}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          zIndex: 99999,
+          opacity: 0,
+          background: "var(--bg-primary)",
+          color: "var(--text-primary)",
+          padding: "4px 10px",
+          borderRadius: "6px",
+          fontSize: "12px",
+          fontWeight: 700,
+          fontFamily: "var(--font-jakarta), sans-serif",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          border: "1px solid var(--card-border)",
+          transition: "opacity 0.15s ease",
+          transform: "translate(0, -50%)"
+        }}
+      />
+
       {/* Standard view */}
       <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", position: "relative" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
@@ -434,7 +531,7 @@ export default function Map3D() {
           position: "fixed", top: "50%", left: "50%",
           transform: "translate(-50%, -50%)",
           width: "calc(100vw - 48px)", maxWidth: "1400px",
-          height: "calc(100vh - 48px)", zIndex: 9999,
+          height: "calc(100dvh - 48px)", zIndex: 9999,
           background: "var(--bg-primary)", borderRadius: "24px",
           border: "1px solid var(--card-border)",
           boxShadow: "0 40px 100px rgba(0,0,0,0.4)",
@@ -485,6 +582,13 @@ export default function Map3D() {
       )}
 
       <style jsx global>{`
+        .interactive-path {
+          transition: fill 0.22s ease, opacity 0.3s ease, filter 0.22s ease !important;
+        }
+        .interactive-path:hover {
+          fill: var(--map-fill-hover) !important;
+          filter: brightness(1.15) !important;
+        }
         @keyframes mapFloat {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px) rotateX(0.5deg); }
