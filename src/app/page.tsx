@@ -437,7 +437,7 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                  <p style={{ fontFamily: "var(--font-playfair), serif", fontStyle: "italic", fontSize: "16px", fontWeight: 600, color: "var(--brand-red)", margin: 0, lineHeight: 1.45 }}>
                     Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
                   </p>
 
@@ -530,7 +530,7 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                  <p style={{ fontFamily: "var(--font-playfair), serif", fontStyle: "italic", fontSize: "16px", fontWeight: 600, color: "var(--brand-red)", margin: 0, lineHeight: 1.45 }}>
                     We set a minimum wage with no data on what it actually costs the national budget.
                   </p>
 
@@ -623,7 +623,7 @@ export default function Home() {
                     </h3>
                   </div>
 
-                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                  <p style={{ fontFamily: "var(--font-playfair), serif", fontStyle: "italic", fontSize: "16px", fontWeight: 600, color: "var(--brand-red)", margin: 0, lineHeight: 1.45 }}>
                     Projects start. Contractors disappear. Nothing gets finished.
                   </p>
 
