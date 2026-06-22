@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 export default function Preloader() {
-  const [progress, setProgress] = useState(0);
   const [isFadeOut, setIsFadeOut] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -16,27 +15,18 @@ export default function Preloader() {
       return;
     }
 
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsFadeOut(true);
-            sessionStorage.setItem("campaign_preloader_seen", "true");
-            setTimeout(() => {
-              setIsHidden(true);
-            }, 600); // Wait for CSS opacity animation to finish
-          }, 300); // Small pause at 100%
-          return 100;
-        }
-        
-        // Fast at first, slows down towards the end
-        const increment = Math.max(1, Math.floor((100 - prev) * 0.08));
-        return prev + increment;
-      });
-    }, 70);
+    const timer = setTimeout(() => {
+      setIsFadeOut(true);
+      sessionStorage.setItem("campaign_preloader_seen", "true");
+      
+      const hideTimer = setTimeout(() => {
+        setIsHidden(true);
+      }, 600); // Wait for CSS opacity animation to finish
+      
+      return () => clearTimeout(hideTimer);
+    }, 2000); // Show preloader for 2 seconds
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, []);
 
   if (isHidden) return null;
@@ -113,9 +103,9 @@ export default function Preloader() {
         <div
           style={{
             width: "100%",
-            height: "4px",
-            backgroundColor: "rgba(var(--brand-red-rgb), 0.08)", // Light brand red track
-            borderRadius: "2px",
+            height: "5px",
+            backgroundColor: "rgba(10, 77, 47, 0.08)", // Light green track
+            borderRadius: "3px",
             overflow: "hidden",
             marginBottom: "16px",
             position: "relative",
@@ -124,10 +114,11 @@ export default function Preloader() {
           <div
             style={{
               height: "100%",
-              width: `${progress}%`,
-              background: "linear-gradient(90deg, var(--accent) 0%, var(--brand-red) 100%)", // Brand gold-to-red gradient bar
-              borderRadius: "2px",
-              transition: "width 0.1s ease-out",
+              width: "100%",
+              backgroundImage: "repeating-linear-gradient(90deg, var(--primary-light) 0px, var(--primary-light) 20px, #ffffff 20px, #ffffff 40px)",
+              backgroundSize: "40px 100%",
+              borderRadius: "3px",
+              animation: "loadingInfinite 1.2s linear infinite",
             }}
           />
         </div>
@@ -144,7 +135,7 @@ export default function Preloader() {
           }}
         >
           <span>Building a Nigeria for All</span>
-          <span style={{ color: "var(--brand-red)", fontWeight: "bold" }}>{progress}%</span>
+          <span style={{ color: "var(--primary-light)", fontWeight: "bold" }}>Connecting...</span>
         </div>
       </div>
 
@@ -165,6 +156,14 @@ export default function Preloader() {
           50% {
             opacity: 0.9;
             transform: scale(1.1);
+          }
+        }
+        @keyframes loadingInfinite {
+          from {
+            background-position: 0 0;
+          }
+          to {
+            background-position: 40px 0;
           }
         }
       `}</style>
