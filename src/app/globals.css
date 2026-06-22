@@ -46,9 +46,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  height: 100%;
-  overflow-x: hidden;
-  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -56,11 +54,7 @@ body {
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   line-height: 1.6;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* Scrollbar customization */
@@ -104,12 +98,10 @@ body {
   text-decoration: none;
   font-family: inherit;
 }
-@media (hover: hover) {
-  .btn-primary:hover {
-    background-color: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
-  }
+.btn-primary:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
 }
 .btn-primary:active {
   transform: translateY(0);
@@ -131,13 +123,11 @@ body {
   text-decoration: none;
   font-family: inherit;
 }
-@media (hover: hover) {
-  .btn-secondary:hover {
-    background-color: var(--primary);
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
-  }
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
 }
 .btn-secondary:active {
   transform: translateY(0);
@@ -159,12 +149,10 @@ body {
   text-decoration: none;
   font-family: inherit;
 }
-@media (hover: hover) {
-  .btn-accent:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
-  }
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
 }
 
 /* Glassmorphism Card System */
@@ -376,11 +364,9 @@ body {
   transform: skewX(-25deg);
   transition: none;
 }
-@media (hover: hover) {
-  .btn-primary:hover::after, .btn-accent:hover::after {
-    left: 150%;
-    transition: left 0.8s ease-in-out;
-  }
+.btn-primary:hover::after, .btn-accent:hover::after {
+  left: 150%;
+  transition: left 0.8s ease-in-out;
 }
 
 /* Card Pillar Icon hover micro-animation */

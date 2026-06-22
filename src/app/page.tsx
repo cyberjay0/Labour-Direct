@@ -7,43 +7,7 @@ import Map3D from "@/components/Map3D";
 import TrustStrip from "@/components/TrustStrip";
 import { blogDatabase } from "@/data/blogData";
 
-// Helper component for viewport scroll reveal animations
-function ScrollReveal({ children, delay = "0ms" }: { children: React.ReactNode; delay?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(30px)",
-        transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}`,
-        width: "100%",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   // Get the first 3 blog posts for the homepage grid

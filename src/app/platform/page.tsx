@@ -2,6 +2,7 @@
 
 import { Eye, Sun, DollarSign, UserCheck, HeartHandshake, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function PlatformPage() {
   const visionPillars = [
@@ -46,6 +47,7 @@ export default function PlatformPage() {
   return (
     <div className="container" style={{ padding: "40px 24px 80px 24px", display: "flex", flexDirection: "column", gap: "64px" }}>
       {/* Page Header */}
+      <ScrollReveal>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
         <span
           style={{
@@ -83,8 +85,10 @@ export default function PlatformPage() {
           Six integration pillars designed to coordinate economic planning, resource deployment, and civic monitoring across Nigeria.
         </p>
       </div>
+      </ScrollReveal>
 
       {/* Pillars Grid */}
+      <ScrollReveal delay="100ms">
       <div
         style={{
           display: "grid",
@@ -154,8 +158,10 @@ export default function PlatformPage() {
           </div>
         ))}
       </div>
+      </ScrollReveal>
 
       {/* Secondary note */}
+      <ScrollReveal delay="200ms">
       <div
         style={{
           display: "flex",
@@ -195,6 +201,7 @@ export default function PlatformPage() {
           </Link>
         </div>
       </div>
+      </ScrollReveal>
     </div>
   );
 }

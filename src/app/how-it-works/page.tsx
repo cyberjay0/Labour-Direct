@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, LogIn, LayoutGrid, CheckSquare, ShieldCheck } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "How It Works | Labour Direct",
@@ -38,6 +39,7 @@ export default function HowItWorks() {
   return (
     <div className="container" style={{ padding: "40px 24px 80px 24px", display: "flex", flexDirection: "column", gap: "64px" }}>
       {/* Hero Section */}
+      <ScrollReveal>
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
         <span
           style={{
@@ -76,8 +78,10 @@ export default function HowItWorks() {
           A step by step walkthrough of how the Labour Direct platform coordinates policy, finances, and civic monitoring across Nigeria.
         </p>
       </div>
+      </ScrollReveal>
 
       {/* Grid of Steps */}
+      <ScrollReveal delay="100ms">
       <div
         style={{
           display: "grid",
@@ -154,8 +158,10 @@ export default function HowItWorks() {
           </div>
         ))}
       </div>
+      </ScrollReveal>
 
       {/* Bottom CTA Block */}
+      <ScrollReveal delay="200ms">
       <div
         className="glass-card"
         style={{
@@ -199,6 +205,7 @@ export default function HowItWorks() {
           Request Access <ArrowRight size={18} />
         </Link>
       </div>
+      </ScrollReveal>
     </div>
   );
 }
