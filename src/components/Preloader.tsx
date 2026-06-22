@@ -99,13 +99,13 @@ export default function Preloader() {
           />
         </div>
 
-        {/* Loading Progress Bar */}
+        {/* Premium slider line matching Blue Havens style */}
         <div
           style={{
-            width: "100%",
-            height: "5px",
-            backgroundColor: "rgba(10, 77, 47, 0.08)", // Light green track
-            borderRadius: "3px",
+            width: "128px",
+            height: "2px",
+            backgroundColor: "rgba(10, 77, 47, 0.1)", // Light green track
+            borderRadius: "9999px",
             overflow: "hidden",
             marginBottom: "16px",
             position: "relative",
@@ -113,12 +113,13 @@ export default function Preloader() {
         >
           <div
             style={{
-              height: "100%",
-              width: "100%",
-              backgroundImage: "repeating-linear-gradient(90deg, var(--primary-light) 0px, var(--primary-light) 20px, #ffffff 20px, #ffffff 40px)",
-              backgroundSize: "40px 100%",
-              borderRadius: "3px",
-              animation: "loadingInfinite 1.2s linear infinite",
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              width: "50%",
+              background: "linear-gradient(90deg, transparent 0%, var(--primary-light) 50%, transparent 100%)",
+              borderRadius: "9999px",
+              animation: "slideLine 1.5s ease-in-out infinite",
             }}
           />
         </div>
@@ -158,12 +159,12 @@ export default function Preloader() {
             transform: scale(1.1);
           }
         }
-        @keyframes loadingInfinite {
-          from {
-            background-position: 0 0;
+        @keyframes slideLine {
+          0% {
+            left: -50%;
           }
-          to {
-            background-position: 40px 0;
+          100% {
+            left: 100%;
           }
         }
       `}</style>
