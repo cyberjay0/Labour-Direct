@@ -3,48 +3,48 @@
 import { Eye, Sun, DollarSign, UserCheck, HeartHandshake, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
-export default function VisionPage() {
+export default function PlatformPage() {
   const visionPillars = [
     {
       icon: <DollarSign size={24} style={{ color: "#eab308" }} />,
-      title: "Shared Wealth Creation",
-      headline: "Equal Opportunities for All Workers",
-      description: "Restructuring business tax regulations to assist startups, providing grants to digital hubs, and encouraging regional export capabilities."
+      title: "Economic Integration",
+      headline: "Cross-Sector Financial Tracking",
+      description: "Restructuring business tax models, monitoring small business grants, and updating regional export data dynamically to prevent duplicate budgeting."
     },
     {
       icon: <Eye size={24} style={{ color: "#eab308" }} />,
-      title: "Skills for the Future",
-      headline: "Transforming the Classroom",
-      description: "Integrating programming, analytics, and environmental sciences into schools while upgrading career benefits for teachers."
+      title: "Education Infrastructure",
+      headline: "Smart Resource Mapping",
+      description: "Cross-referencing educational statistics, school locations, power grids, and teacher deployment automatically to ensure schools are built with operational infrastructure."
     },
     {
       icon: <Sun size={24} style={{ color: "#eab308" }} />,
-      title: "Clean Hydro and Solar Power",
-      headline: "Stable Energy for Factories",
-      description: "Harnessing renewable solar and hydro assets through decentralized local mini grids to power manufacturing zones."
+      title: "Power Grid Coordination",
+      headline: "Decentralized Resource Tracking",
+      description: "Mapping solar, hydro, and gas assets to local industrial zones, tracking micro-grid capacity, and flagging energy supply deficits in real time."
     },
     {
       icon: <ShieldCheck size={24} style={{ color: "#eab308" }} />,
-      title: "Security and Trust",
-      headline: "Community Oriented Safety Systems",
-      description: "Empowering local neighborhood security, applying smart drone tracking at trading routes, and building civic trust boards."
+      title: "Security Operations",
+      headline: "Community Safety Monitoring",
+      description: "Coordinating ward-level safety reports, monitoring transport route datasets, and integrating community security feedback boards into an active map."
     },
     {
       icon: <UserCheck size={24} style={{ color: "#eab308" }} />,
-      title: "Administrative Reforms",
-      headline: "Modern Government Services",
-      description: "Moving public filings and citizen registrations to secure digital cloud systems to reduce processing times."
+      title: "Digital Governance Engine",
+      headline: "Unified Cloud Operations",
+      description: "Streamlining public registrations, land registries, sector statistics, and policy databases into a single searchable, secure cloud platform."
     },
     {
       icon: <HeartHandshake size={24} style={{ color: "#eab308" }} />,
-      title: "Universal Healthcare Schemes",
-      headline: " subsidies for Life Saving Care",
-      description: "Upgrading local ward clinics with constant solar power, essential medicines, and introducing basic subsidization plans."
+      title: "Healthcare Access Network",
+      headline: "State-Wide Clinic Tracking",
+      description: "Tracking ward-health center equipment, scheduling drug supply chains, and automating basic healthcare subsidy plans to ensure medical access reaches citizens."
     }
   ];
 
   return (
-    <div className="container" style={{ padding: "40px 0 80px 0", display: "flex", flexDirection: "column", gap: "64px" }}>
+    <div className="container" style={{ padding: "40px 24px 80px 24px", display: "flex", flexDirection: "column", gap: "64px" }}>
       {/* Page Header */}
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
         <span
@@ -57,7 +57,7 @@ export default function VisionPage() {
             fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
-          Our Agenda
+          Core Architecture
         </span>
         <h1
           style={{
@@ -68,7 +68,7 @@ export default function VisionPage() {
             lineHeight: 1.1,
           }}
         >
-          The Manifesto: <span style={{ color: "var(--primary)" }}>Our Vision for Nigeria</span>
+          The Platform: <span style={{ color: "var(--primary)" }}>Integrated Governance</span>
         </h1>
         <p
           style={{
@@ -80,7 +80,7 @@ export default function VisionPage() {
             lineHeight: 1.6,
           }}
         >
-          Six strategic pillars designed to catalyze industrialization, foster human capital growth, and secure the welfare of all citizens.
+          Six integration pillars designed to coordinate economic planning, resource deployment, and civic monitoring across Nigeria.
         </p>
       </div>
 
@@ -101,6 +101,8 @@ export default function VisionPage() {
               display: "flex",
               flexDirection: "column",
               gap: "16px",
+              border: "1px solid var(--card-border)",
+              borderRadius: "20px"
             }}
           >
             <div
@@ -153,7 +155,7 @@ export default function VisionPage() {
         ))}
       </div>
 
-      {/* Secondary manifesto note */}
+      {/* Secondary note */}
       <div
         style={{
           display: "flex",
@@ -172,7 +174,7 @@ export default function VisionPage() {
             color: "var(--text-primary)",
           }}
         >
-          Regional Implementation
+          Regional Deployments
         </h3>
         <p
           style={{
@@ -182,11 +184,11 @@ export default function VisionPage() {
             lineHeight: 1.6,
           }}
         >
-          We recognize that a single blueprint cannot fit all thirty six states. Our plans are adjusted to fit local strengths: from eastern industrial manufacturing hubs to northern agricultural corridors and southern gas to power networks.
+          We recognize that a single blueprint cannot fit all thirty six states. Our system is adjusted to fit regional strengths: from eastern industrial manufacturing hubs to northern agricultural corridors and southern gas to power networks.
         </p>
         <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginTop: "8px" }}>
-          <Link href="/plan" className="btn-primary">
-            Explore Sector Blueprints
+          <Link href="/sectors" className="btn-primary">
+            Explore Sector Modules
           </Link>
           <Link href="/" className="btn-secondary">
             View Interactive State Map

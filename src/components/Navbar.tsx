@@ -42,11 +42,11 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Vision", href: "/vision" },
-    { label: "Plan", href: "/plan" },
-    { label: "Blog", href: "/blog" },
-    { label: "Get Involved", href: "/get-involved" }
+    { label: "About Labour Direct", href: "/about" },
+    { label: "The Platform", href: "/platform" },
+    { label: "Sectors", href: "/sectors" },
+    { label: "Updates", href: "/blog" },
+    { label: "Request Access", href: "/get-involved" }
   ];
 
   return (
@@ -168,7 +168,7 @@ export default function Navbar() {
 
             {/* CTA Join Movement */}
             <Link href="/get-involved" className="btn-accent" style={{ padding: "10px 18px", fontSize: "14px" }}>
-              Join the Movement <ArrowRight size={16} />
+              Request Access <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -277,7 +277,7 @@ export default function Navbar() {
               className="btn-accent"
               style={{ width: "100%", padding: "14px" }}
             >
-              Join the Movement <ArrowRight size={18} />
+              Request Access <ArrowRight size={18} />
             </Link>
           </div>
         </div>

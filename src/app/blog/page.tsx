@@ -322,7 +322,7 @@ export default function BlogPage() {
             fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
-          Campaign Hub
+          Platform Updates
         </span>
         <h1
           style={{
@@ -345,7 +345,7 @@ export default function BlogPage() {
             lineHeight: 1.6,
           }}
         >
-          Stay informed on our regional campaigns, manifesto launches, and localized initiatives across thirty six states.
+          Stay informed on sector updates, regional reports, and localized listening initiatives across all thirty six states.
         </p>
       </div>
 

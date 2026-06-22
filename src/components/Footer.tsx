@@ -36,7 +36,7 @@ export default function Footer() {
           marginBottom: "48px",
         }}
       >
-        {/* Campaign Info */}
+        {/* Platform Info */}
         <div>
           <div style={{ display: "flex", alignItems: "center", marginBottom: "16px" }}>
             <img
@@ -58,7 +58,7 @@ export default function Footer() {
               maxWidth: "320px",
             }}
           >
-            Building a nation based on shared wealth, localized industrial growth, and equal access to opportunities.
+            Labour Direct is a cross-sector digital platform that integrates policy and infrastructure planning for every sector of the Nigerian economy.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function Footer() {
         <div>
           <h3
             style={{
-              fontFamily: "var(--font-playfair), sans-serif",
+              fontFamily: "var(--font-playfair), serif",
               fontSize: "16px",
               fontWeight: 700,
               color: "var(--text-primary)",
@@ -75,15 +75,15 @@ export default function Footer() {
               letterSpacing: "1px",
             }}
           >
-            Campaign Navigation
+            Platform Navigation
           </h3>
           <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
             {[
-              { label: "Biography and About", href: "/about" },
-              { label: "Our National Vision", href: "/vision" },
-              { label: "Policy Manifestos", href: "/plan" },
-              { label: "Articles and Press Releases", href: "/blog" },
-              { label: "Get Involved Today", href: "/get-involved" }
+              { label: "About Labour Direct", href: "/about" },
+              { label: "The Platform", href: "/platform" },
+              { label: "Sectors Overview", href: "/sectors" },
+              { label: "Platform Updates", href: "/blog" },
+              { label: "Request Access", href: "/get-involved" }
             ].map((link) => (
               <li key={link.href}>
                 <Link
@@ -109,7 +109,7 @@ export default function Footer() {
         <div>
           <h3
             style={{
-              fontFamily: "var(--font-playfair), sans-serif",
+              fontFamily: "var(--font-playfair), serif",
               fontSize: "16px",
               fontWeight: 700,
               color: "var(--text-primary)",
@@ -118,7 +118,7 @@ export default function Footer() {
               letterSpacing: "1px",
             }}
           >
-            Get Campaign Updates
+            Get Platform Updates
           </h3>
           <p
             style={{
@@ -128,7 +128,7 @@ export default function Footer() {
               marginBottom: "16px",
             }}
           >
-            Receive our latest policy papers and local announcements directly in your inbox.
+            Receive our latest policy papers and system updates directly in your inbox.
           </p>
 
           {submitted ? (
@@ -143,7 +143,7 @@ export default function Footer() {
               }}
             >
               <CheckCircle2 size={18} />
-              <span>Subscription successful! Welcome to the movement.</span>
+              <span>Subscription successful! Welcome to the platform.</span>
             </div>
           ) : (
             <form
@@ -216,7 +216,7 @@ export default function Footer() {
             color: "var(--text-muted)",
           }}
         >
-          &copy; 2026 Tunde Abiola Campaign Organization. All rights reserved.
+          &copy; 2026 Labour Institute of Nigeria. All rights reserved.
         </span>
         <span
           style={{
@@ -225,7 +225,7 @@ export default function Footer() {
             color: "var(--text-muted)",
           }}
         >
-          Authorized by the National Campaign Committee.
+          Governed by the NLC and TUC Governing Board.
         </span>
       </div>
     </footer>

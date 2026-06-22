@@ -4,26 +4,26 @@ import { Award, ShieldAlert, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutPage() {
-  const leadershipValues = [
+  const coreValues = [
     {
-      icon: <Award size={24} style={{ color: "#eab308" }} />,
-      title: "Integrity and Accountability",
-      description: "Believing that true governance is founded on direct transparency and accountability to all citizens."
+      icon: <Award size={24} style={{ color: "var(--primary)" }} />,
+      title: "Worker Centered Governance",
+      description: "Governed directly by the NLC and TUC to ensure the platform is used for public wealth and policy coordination, not personal political campaigning."
     },
     {
-      icon: <Heart size={24} style={{ color: "#eab308" }} />,
-      title: "Inclusive Prosperity",
-      description: "Ensuring that industrial growth reaches from urban tech startup spaces to rural crop processing cooperatives."
+      icon: <Heart size={24} style={{ color: "var(--primary)" }} />,
+      title: "Data Driven Transparency",
+      description: "Providing public access to cost databases, mapping coordinates, and contract life cycles so citizens can independently verify state claims."
     },
     {
-      icon: <ShieldAlert size={24} style={{ color: "#eab308" }} />,
-      title: "Decentralized Service",
-      description: "Advocating that local challenges are best resolved by empowering communities with skills and resources."
+      icon: <ShieldAlert size={24} style={{ color: "var(--primary)" }} />,
+      title: "Cross-Sector Coordination",
+      description: "Breaking down ministerial silos so education, health, agriculture, and road plans talk to each other in one system automatically."
     }
   ];
 
   return (
-    <div className="container" style={{ padding: "40px 0 80px 0", display: "flex", flexDirection: "column", gap: "64px" }}>
+    <div className="container" style={{ padding: "40px 24px 80px 24px", display: "flex", flexDirection: "column", gap: "64px" }}>
       {/* Page Header */}
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
         <span
@@ -36,7 +36,7 @@ export default function AboutPage() {
             fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
-          Meet the Candidate
+          About the Platform
         </span>
         <h1
           style={{
@@ -47,7 +47,7 @@ export default function AboutPage() {
             lineHeight: 1.1,
           }}
         >
-          Visionary Leadership <span style={{ color: "var(--primary)" }}>for a New Era</span>
+          The Operating System <span style={{ color: "var(--primary)" }}>for Nigerian Government</span>
         </h1>
         <p
           style={{
@@ -59,11 +59,11 @@ export default function AboutPage() {
             lineHeight: 1.6,
           }}
         >
-          A dedicated leader with over twenty years of experience in administrative service, industrial manufacturing, and community development.
+          Developed by the Labour Institute of Nigeria as a cross sector planning system ready for adoption on Day One.
         </p>
       </div>
 
-      {/* Main Biography Section */}
+      {/* Main Narrative Section */}
       <div
         style={{
           display: "grid",
@@ -102,14 +102,24 @@ export default function AboutPage() {
               border: "4px solid var(--bg-secondary)",
               position: "relative",
               zIndex: 2,
-              height: "450px",
+              height: "380px",
+              background: "linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "32px",
+              textAlign: "center"
             }}
           >
-            <img
-              src="/candidate.png"
-              alt="Tunde Abiola Portrait"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
+            <div>
+              <div style={{ fontSize: "64px", marginBottom: "16px" }}>🇳🇬</div>
+              <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "22px", fontWeight: 800, color: "var(--text-primary)" }}>
+                Labour Institute of Nigeria
+              </h3>
+              <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "13px", color: "var(--text-secondary)", marginTop: "8px" }}>
+                Established to promote social democracy, economic sovereignty, and policy research for Nigerian workers.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -123,7 +133,7 @@ export default function AboutPage() {
               color: "var(--text-primary)",
             }}
           >
-            The Story of Tunde Abiola
+            Why Labour Direct Was Built
           </h2>
           <p
             style={{
@@ -133,9 +143,7 @@ export default function AboutPage() {
               lineHeight: 1.7,
             }}
           >
-            Born and raised in Nigeria, Tunde Abiola began his career in logistics operations and manufacturing
-            systems. Over two decades, he successfully spearheaded major industrial revivals that created
-            sustainable employment for thousands of young graduates.
+            Right now, government ministries in Nigeria work separately. Health plans hospitals, Works plans roads, and Education plans schools. Because they do not coordinate, we get a new hospital with no access road to reach it, or a school with no power line to teach in.
           </p>
           <p
             style={{
@@ -145,9 +153,7 @@ export default function AboutPage() {
               lineHeight: 1.7,
             }}
           >
-            His public service record is marked by transparent project execution. Having served as a senior advisor
-            on state infrastructure networks, he designed and co implemented solar energy micro grids that currently
-            power remote community health outposts and schools.
+            Labour Direct fixes this. It provides a single digital system where every sector health, education, power, agriculture, water, works is mapped, costed, and linked.
           </p>
           <p
             style={{
@@ -157,9 +163,7 @@ export default function AboutPage() {
               lineHeight: 1.7,
             }}
           >
-            Tunde believes that public office is a trust. His decision to run for President in 2027 is driven
-            by a commitment to restore inclusive growth, modernize education, secure communities, and ensure every
-            region participates in the national industrial renaissance.
+            Governed by a joint board of the Nigeria Labour Congress (NLC) and Trade Union Congress (TUC), the platform serves as a public-interest tool owned by the Nigerian people to drive economic stability and worker welfare.
           </p>
         </div>
       </div>
@@ -175,7 +179,7 @@ export default function AboutPage() {
             textAlign: "center",
           }}
         >
-          Core Values Guide Our Campaign
+          Our Governing Principles
         </h3>
         <div
           style={{
@@ -184,7 +188,7 @@ export default function AboutPage() {
             gap: "24px",
           }}
         >
-          {leadershipValues.map((val, idx) => (
+          {coreValues.map((val, idx) => (
             <div
               key={idx}
               className="glass-card"
@@ -195,6 +199,8 @@ export default function AboutPage() {
                 gap: "16px",
                 textAlign: "center",
                 alignItems: "center",
+                border: "1px solid var(--card-border)",
+                borderRadius: "20px"
               }}
             >
               <div
@@ -235,6 +241,55 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Who is it for */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+          maxWidth: "800px",
+          margin: "0 auto",
+        }}
+      >
+        <h3
+          style={{
+            fontFamily: "var(--font-playfair), serif",
+            fontSize: "24px",
+            fontWeight: 800,
+            color: "var(--text-primary)",
+            textAlign: "center"
+          }}
+        >
+          Built for All Stakeholders
+        </h3>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }} className="stakeholder-grid">
+          <div className="glass-card" style={{ padding: "24px", borderRadius: "16px", border: "1px solid var(--card-border)" }}>
+            <h4 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "16px", fontWeight: 700, margin: "0 0 8px 0" }}>For Governments</h4>
+            <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+              A ready to use governance system pre loaded with data, budget engines, and sector policies for immediate swearing in day deployment.
+            </p>
+          </div>
+          <div className="glass-card" style={{ padding: "24px", borderRadius: "16px", border: "1px solid var(--card-border)" }}>
+            <h4 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "16px", fontWeight: 700, margin: "0 0 8px 0" }}>For Citizens</h4>
+            <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+              A portal to track physical project delivery, verify cost estimates, and alert authorities of abandoned infrastructure sites.
+            </p>
+          </div>
+          <div className="glass-card" style={{ padding: "24px", borderRadius: "16px", border: "1px solid var(--card-border)" }}>
+            <h4 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "16px", fontWeight: 700, margin: "0 0 8px 0" }}>For Unions & Groups</h4>
+            <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+              An analytical policy framework to verify wage proposals, track national budget allocations, and defend worker rights.
+            </p>
+          </div>
+          <div className="glass-card" style={{ padding: "24px", borderRadius: "16px", border: "1px solid var(--card-border)" }}>
+            <h4 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "16px", fontWeight: 700, margin: "0 0 8px 0" }}>For Researchers & Press</h4>
+            <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+              An open database of Nigeria's laws, LGA metrics, and sector indicators for accurate, evidence based reporting.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* CTA section */}
       <div
         className="glass-card"
@@ -258,7 +313,7 @@ export default function AboutPage() {
             fontWeight: 800,
           }}
         >
-          Be Part of the Nationwide Plan
+          Explore the Planning System
         </h3>
         <p
           style={{
@@ -269,10 +324,10 @@ export default function AboutPage() {
             lineHeight: 1.6,
           }}
         >
-          We are recruiting local coordinators, tech innovators, and civic volunteers across all thirty six states.
+          See how the 36 states and 774 LGAs are mapped, and how individual sector policies are integrated into the budget engine.
         </p>
         <Link href="/get-involved" className="btn-accent">
-          Join the Movement <ArrowRight size={18} />
+          Request Access Credentials <ArrowRight size={18} />
         </Link>
       </div>
 
@@ -280,6 +335,11 @@ export default function AboutPage() {
         @media (min-width: 768px) {
           .bio-grid {
             grid-template-columns: 0.9fr 1.1fr !important;
+          }
+        }
+        @media (max-width: 576px) {
+          .stakeholder-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, TrendingUp, Shield, Server, User } from "lucide-react";
 import Map3D from "@/components/Map3D";
+import TrustStrip from "@/components/TrustStrip";
 import { blogDatabase } from "@/data/blogData";
 
 // Helper component for viewport scroll reveal animations
@@ -143,34 +144,36 @@ export default function Home() {
             <span
               className="animate-fade-in-up"
               style={{
-                fontSize: "12px",
+                fontSize: "11px",
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "2px",
-                color: "var(--primary)",
                 display: "inline-flex",
                 alignItems: "center",
+                gap: "10px",
                 fontFamily: "var(--font-jakarta), sans-serif",
                 animationDelay: "100ms",
+                flexWrap: "wrap",
               }}
             >
-              Government with GPS
+              <span style={{ color: "var(--primary)" }}>The Operating System for Nigerian Government</span>
+              <span style={{ color: "var(--card-border)", fontSize: "14px" }}>|</span>
+              <span style={{ color: "var(--text-muted)" }}>Government with <span style={{ color: "var(--brand-red)", fontWeight: 800 }}>GPS</span></span>
             </span>
             <h1
               className="animate-fade-in-up"
               style={{
                 fontFamily: "var(--font-playfair), serif",
-                fontSize: "clamp(36px, 5vw, 56px)",
+                fontSize: "clamp(34px, 5vw, 54px)",
                 fontWeight: 900,
-                lineHeight: 1.1,
+                lineHeight: 1.08,
                 color: "var(--text-primary)",
                 animationDelay: "200ms",
               }}
             >
-              Labour Direct Platform <br />
-              <span style={{ color: "var(--brand-red)" }}>
-                Ready on Day One
-              </span>
+              Labour Direct<span style={{ color: "var(--brand-red)" }}>:</span><br />
+              Every Sector. One System.<br />
+              <span style={{ color: "var(--brand-red)" }}>Ready on Day One.</span>
             </h1>
             <p
               className="animate-fade-in-up"
@@ -178,12 +181,12 @@ export default function Home() {
                 fontFamily: "var(--font-jakarta), sans-serif",
                 fontSize: "clamp(15px, 2vw, 17px)",
                 color: "var(--text-secondary)",
-                lineHeight: 1.6,
+                lineHeight: 1.65,
                 maxWidth: "520px",
                 animationDelay: "300ms",
               }}
             >
-              Labour Direct is a cross sector digital platform that integrates policy and infrastructure planning for every sector of the Nigerian economy. It is a ready made system any government can adopt on Day One instead of starting from scratch.
+              Think of it as Google Maps, Budget Office and NLC Policy Unit in one platform. Every ministry. Every sector. One unified plan. Pre-loaded with Nigeria&apos;s laws, all 774 LGAs and a live budget engine. Any government. Any day.
             </p>
 
             {/* Premium Stat Panel */}
@@ -215,7 +218,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Value Props — editorial dash list */}
+            {/* Value props as active platform statements */}
             <div
               className="animate-fade-in-up"
               style={{
@@ -229,19 +232,19 @@ export default function Home() {
                 paddingLeft: "16px",
               }}
             >
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more lost projects.</p>
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more conflicting plans.</p>
-              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more wasted years.</p>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>Every promised project is mapped, costed and linked to other sectors.</p>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>Contractor goes dark? System alerts EFCC and BPP automatically.</p>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>Citizens track, verify and endorse plans before elections begin.</p>
             </div>
 
             <div 
               className="animate-fade-in-up"
               style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginTop: "8px", animationDelay: "500ms" }}
             >
-              <Link href="/plan" className="btn-primary">
-                Explore the Platform <ArrowRight size={18} />
+              <Link href="/how-it-works" className="btn-primary">
+                See How It Works <ArrowRight size={18} />
               </Link>
-              <Link href="/vision" className="btn-secondary">
+              <Link href="/platform" className="btn-secondary">
                 Read the Vision
               </Link>
             </div>
@@ -394,10 +397,74 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* Latest Articles Section */}
+      <TrustStrip />
+
+      {/* Sector Solutions + Blog Section */}
       <section style={{ backgroundColor: "var(--bg-tertiary)", padding: "80px 0", transition: "background-color 0.3s" }}>
         <ScrollReveal>
-          <div className="container" style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+          <div className="container" style={{ display: "flex", flexDirection: "column", gap: "64px" }}>
+
+            {/* Sector Solution Cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+              <div>
+                <span style={{ fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: "var(--primary)", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                  What Labour Direct Solves
+                </span>
+                <h2 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "clamp(26px, 3.5vw, 34px)", fontWeight: 800, color: "var(--text-primary)", marginTop: "4px", marginBottom: 0 }}>
+                  A Platform Built for Every Sector
+                </h2>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: "24px" }}>
+                {/* Education card */}
+                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
+                  <div style={{ fontSize: "28px" }}>🎓</div>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                    Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
+                  </p>
+                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
+                    Labour Direct cross-references every school with access roads, power supply, and teacher deployment. Statewide. Automatically.
+                  </p>
+                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                    See the Education Plan <ArrowRight size={14} />
+                  </Link>
+                </div>
+
+                {/* Economy card */}
+                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
+                  <div style={{ fontSize: "28px" }}>📈</div>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                    We set a minimum wage with no data on what it actually costs the national budget.
+                  </p>
+                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
+                    Labour Direct&apos;s budget engine shows instantly: N200k wage equals N1.4 trillion wage bill and a 3% inflation risk. Every sector affected, visible before the announcement.
+                  </p>
+                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                    See the Economy Plan <ArrowRight size={14} />
+                  </Link>
+                </div>
+
+                {/* Infrastructure card */}
+                <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "28px", borderRadius: "20px", border: "1px solid var(--card-border)" }}>
+                  <div style={{ fontSize: "28px" }}>🏗</div>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
+                    Projects start. Contractors disappear. Nothing gets finished.
+                  </p>
+                  <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55 }}>
+                    Every Labour Direct project has a digital lifecycle from procurement to delivery. Citizens upload photos. Site abandonment triggers automatic alerts to EFCC and BPP.
+                  </p>
+                  <Link href="/sectors" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", fontWeight: 600, color: "var(--primary)", textDecoration: "none", marginTop: "auto", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                    See the Infrastructure Plan <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div style={{ borderTop: "1px solid var(--card-border)" }} />
+
+          {/* Blog grid */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
           {/* Header row */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px" }}>
             <div>
@@ -618,6 +685,7 @@ export default function Home() {
               );
             })}
           </div>
+          </div>
         </div>
       </ScrollReveal>
     </section>
@@ -776,8 +844,8 @@ export default function Home() {
             </div>
 
             <div style={{ display: "flex", gap: "12px", marginTop: "16px" }}>
-              <Link href="/plan" className="btn-primary">
-                Explore Policies
+              <Link href="/sectors" className="btn-primary">
+                Explore Sectors
               </Link>
             </div>
           </div>

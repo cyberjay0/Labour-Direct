@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TrendingUp, BookOpen, Shield, Server, Leaf, Heart, CheckCircle2 } from "lucide-react";
 import { policyDatabase } from "@/data/policyData";
 
-export default function PlanPage() {
+export default function SectorsPage() {
   const [selectedSlug, setSelectedSlug] = useState("economy");
 
   const activeSector = policyDatabase.find((p) => p.slug === selectedSlug) || policyDatabase[0];
@@ -30,7 +30,7 @@ export default function PlanPage() {
   };
 
   return (
-    <div className="container" style={{ padding: "40px 0 80px 0", display: "flex", flexDirection: "column", gap: "48px" }}>
+    <div className="container" style={{ padding: "40px 24px 80px 24px", display: "flex", flexDirection: "column", gap: "48px" }}>
       {/* Page Header */}
       <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
         <span
@@ -43,7 +43,7 @@ export default function PlanPage() {
             fontFamily: "var(--font-jakarta), sans-serif",
           }}
         >
-          Manifesto Details
+          Integrated Sectors
         </span>
         <h1
           style={{
@@ -54,7 +54,7 @@ export default function PlanPage() {
             lineHeight: 1.1,
           }}
         >
-          Policy Explorer <span style={{ color: "var(--primary)" }}>by Sector</span>
+          National Sector Planning <span style={{ color: "var(--primary)" }}>Engines</span>
         </h1>
         <p
           style={{
@@ -66,7 +66,7 @@ export default function PlanPage() {
             lineHeight: 1.6,
           }}
         >
-          Click on a sector below to explore our detailed policy frameworks, milestones, and strategic targets for Nigeria.
+          Explore the detailed policy frameworks, milestones, and resource mappings for each sector integrated within the Labour Direct platform.
         </p>
       </div>
 
@@ -167,7 +167,7 @@ export default function PlanPage() {
                   color: "var(--text-primary)",
                 }}
               >
-                {activeSector.title} Blueprint
+                {activeSector.title} Integration Module
               </h2>
               <p
                 style={{
