@@ -3,19 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sun, Moon, Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Initial theme check
-    const isDark = document.documentElement.classList.contains("dark");
-    setTheme(isDark ? "dark" : "light");
-
     const handleScroll = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
@@ -27,18 +22,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    if (theme === "light") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setTheme("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setTheme("light");
-    }
-  };
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -157,15 +140,6 @@ export default function Navbar() {
             }}
             className="desktop-actions"
           >
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn"
-              aria-label="Toggle dark mode"
-            >
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
-
             {/* CTA Join Movement */}
             <Link href="/get-involved" className="btn-accent" style={{ padding: "10px 18px", fontSize: "14px" }}>
               Request Access <ArrowRight size={16} />
@@ -181,15 +155,6 @@ export default function Navbar() {
             }}
             className="mobile-controls"
           >
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn"
-              style={{ display: "flex" }}
-              aria-label="Toggle dark mode"
-            >
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
-
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               style={{

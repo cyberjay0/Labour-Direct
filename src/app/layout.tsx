@@ -73,21 +73,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${jakarta.variable} h-full antialiased`}
       style={{ fontFamily: "var(--font-jakarta), sans-serif" }}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-      </head>
+      <head />
       <body
         className="min-h-full flex flex-col"
         style={{

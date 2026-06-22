@@ -36,43 +36,6 @@
   --navbar-border: rgba(10, 77, 47, 0.06);
 }
 
-.dark {
-  /* Obsidian Emerald Dark Mode */
-  --bg-primary: #070a08;
-  --bg-secondary: #0f1411;
-  --bg-tertiary: #171d19;
-  
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  
-  --primary: #10b981;        /* Glowing Emerald */
-  --primary-light: #34d399;
-  --primary-dark: #064e3b;
-  --primary-rgb: 16, 185, 129;
-  
-  --accent: #fbbf24;         /* Glowing Amber Gold */
-  --accent-hover: #f59e0b;
-  --accent-rgb: 251, 191, 36;
-  
-  --brand-red: #f43f5e;      /* Glowing Brand Red */
-  --brand-red-rgb: 244, 63, 94;
-  
-  --card-bg: rgba(15, 20, 17, 0.8);
-  --card-border: rgba(16, 185, 129, 0.15);
-  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-  
-  --map-stroke: #070a08;
-  --map-fill: #065f46;
-  --map-fill-hover: #059669;
-  --map-fill-active: #10b981;
-  --map-depth: #022c1b;
-  --map-shadow: rgba(0, 0, 0, 0.5);
-  
-  --navbar-bg: rgba(7, 10, 8, 0.8);
-  --navbar-border: rgba(16, 185, 129, 0.1);
-}
-
 /* Reset & Base Elements */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -340,22 +303,6 @@ body {
   100% { transform: scale(2.2); opacity: 0; }
 }
 
-/* Theme Toggle styles */
-.theme-toggle-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.25s, color 0.25s;
-}
-.theme-toggle-btn:hover {
-  background-color: var(--bg-tertiary);
-}
 
 /* Luxury preloader keyframes */
 @keyframes drawStroke {
@@ -442,9 +389,6 @@ body {
   transition: opacity 0.5s ease;
   animation: floatGlow 15s ease-in-out infinite alternate;
 }
-.dark .ambient-glow-blob {
-  opacity: 0.35;
-}
 
 @keyframes floatGlow {
   0% {
@@ -515,11 +459,6 @@ body {
               0 0 25px rgba(var(--brand-red-rgb), 0.15);
 }
 
-.dark .glass-card-glow:hover {
-  border-color: rgba(var(--brand-red-rgb), 0.5) !important;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 
-              0 0 35px rgba(var(--brand-red-rgb), 0.2);
-}
 
 /* 8. Candidate Portrait Glow Backing */
 .portrait-glow-backing {
