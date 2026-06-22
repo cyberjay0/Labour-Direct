@@ -696,7 +696,7 @@ export default function Home() {
         style={{
           padding: "60px 24px 80px 24px",
           position: "relative",
-          overflow: "visible",
+          overflow: "hidden",
           borderRadius: "24px",
           backgroundColor: "rgba(var(--primary-rgb), 0.015)",
           border: "1px solid var(--card-border)",

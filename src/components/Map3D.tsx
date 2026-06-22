@@ -392,7 +392,7 @@ export default function Map3D() {
           className="map-3d-container"
           style={{
             aspectRatio: "744 / 600",
-            width: fullscreen ? "min(82vw, 88vh)" : "100%",
+            width: fullscreen ? "min(82vw, 88vh)" : "min(100%, 88vw)",
             height: "auto",
             maxWidth: fullscreen ? "1100px" : "600px",
             transform: `rotateX(${rotateXRef.current}deg) rotateZ(${rotateZRef.current}deg) scale(${zoom})`,
@@ -527,54 +527,44 @@ export default function Map3D() {
 
       {/* Fullscreen modal */}
       {isFullscreen && (
-        <div style={{
-          position: "fixed", top: "50%", left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "calc(100vw - 48px)", maxWidth: "1400px",
-          height: "calc(100dvh - 48px)", zIndex: 9999,
-          background: "var(--bg-primary)", borderRadius: "24px",
-          border: "1px solid var(--card-border)",
-          boxShadow: "0 40px 100px rgba(0,0,0,0.4)",
-          display: "flex", flexDirection: "column", overflow: "hidden",
-          animation: "fsModalIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards",
-        }} onClick={(e) => e.stopPropagation()}>
+        <div className="fs-modal-wrapper" onClick={(e) => e.stopPropagation()}>
           {/* Fullscreen header */}
-          <div style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            padding: "20px 28px", borderBottom: "1px solid var(--card-border)", flexShrink: 0,
-            flexWrap: "wrap", gap: "12px",
-          }}>
-            <div>
-              <h3 style={{ fontFamily: "var(--font-playfair), serif", fontSize: "20px", fontWeight: 800, color: "var(--text-primary)", margin: 0 }}>
-                Labour Direct Map Explorer
-              </h3>
-              <p style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "12px", color: "var(--text-muted)", margin: "2px 0 0 0" }}>
-                Drag to rotate. Click a state to view its plan.
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-              <LegendBar />
-              <ControlBar fullscreen={true} />
-              <button onClick={() => setIsFullscreen(false)} style={{ ...controlBtnStyle, marginLeft: "4px", background: "var(--bg-tertiary)" }} title="Close">
+          <div className="fs-header">
+            <div className="fs-header-title-row">
+              <div>
+                <h3 className="fs-title" style={{ fontFamily: "var(--font-playfair), serif", fontSize: "20px", fontWeight: 800, color: "var(--text-primary)", margin: 0 }}>
+                  Labour Direct Map Explorer
+                </h3>
+                <p className="fs-subtitle" style={{ fontFamily: "var(--font-jakarta), sans-serif", fontSize: "12px", color: "var(--text-muted)", margin: "2px 0 0 0" }}>
+                  Drag to rotate. Click a state to view its plan.
+                </p>
+              </div>
+              <button onClick={() => setIsFullscreen(false)} className="fs-mobile-close-btn" style={{ ...controlBtnStyle, background: "var(--bg-tertiary)" }} title="Close">
                 <X size={18} />
               </button>
+            </div>
+            
+            <div className="fs-header-controls-row">
+              <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap", justifyContent: "space-between", width: "100%" }}>
+                <LegendBar />
+                <div style={{ display: "flex", gap: "8px", alignItems: "center" }} className="fs-desktop-controls">
+                  <ControlBar fullscreen={true} />
+                  <button onClick={() => setIsFullscreen(false)} className="fs-desktop-close-btn" style={{ ...controlBtnStyle, marginLeft: "4px", background: "var(--bg-tertiary)" }} title="Close">
+                    <X size={18} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Fullscreen map area */}
-          <div style={{ flex: 1, display: "flex", overflow: "hidden", position: "relative" }}>
-            <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, display: "flex", overflow: "hidden", position: "relative" }} className="fs-map-area">
+            <div style={{ flex: 1 }} className={`map-drag-wrapper ${panelVisible ? "panel-active" : ""}`}>
               <MapDragWrapper fullscreen={true} containerRef={fsMapContainerRef as React.RefObject<HTMLDivElement>} />
             </div>
 
-            {/* Side drawer in fullscreen */}
-            <div style={{
-              position: "absolute", top: "16px", right: "16px", bottom: "16px", width: "340px",
-              transform: panelVisible ? "translateX(0)" : "translateX(calc(100% + 24px))",
-              transition: "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)",
-              zIndex: 100, display: "flex", flexDirection: "column",
-              pointerEvents: panelVisible ? "auto" : "none",
-            }}>
+            {/* Side drawer in fullscreen / Bottom sheet on mobile */}
+            <div className={`fs-details-drawer ${panelVisible ? "visible" : ""}`}>
               {selectedState && <StatePanel state={selectedState} onClose={closePanel} drawerMode />}
             </div>
           </div>
@@ -600,6 +590,162 @@ export default function Map3D() {
         @keyframes fsModalIn {
           from { opacity: 0; transform: translate(-50%, -50%) scale(0.93); }
           to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        @keyframes fsModalInMobile {
+          from { opacity: 0; transform: scale(0.97); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Fullscreen defaults (desktop) */
+        .fs-modal-wrapper {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: calc(100vw - 48px);
+          max-width: 1400px;
+          height: calc(100dvh - 48px);
+          z-index: 9999;
+          background: var(--bg-primary);
+          border-radius: 24px;
+          border: 1px solid var(--card-border);
+          box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          animation: fsModalIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .fs-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 28px;
+          border-bottom: 1px solid var(--card-border);
+          flex-shrink: 0;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .fs-header-title-row {
+          display: block;
+        }
+
+        .fs-header-controls-row {
+          display: block;
+        }
+
+        .fs-mobile-close-btn {
+          display: none !important;
+        }
+
+        .fs-desktop-close-btn {
+          display: flex !important;
+        }
+
+        .fs-details-drawer {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          bottom: 16px;
+          width: 340px;
+          transform: translateX(calc(100% + 24px));
+          transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+          z-index: 100;
+          display: flex;
+          flex-direction: column;
+          pointer-events: none;
+        }
+
+        .fs-details-drawer.visible {
+          transform: translateX(0);
+          pointer-events: auto;
+        }
+
+        .map-drag-wrapper {
+          width: 100%;
+          height: 100%;
+          transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Mobile overrides (< 768px) */
+        @media (max-width: 767px) {
+          .fs-modal-wrapper {
+            top: 0 !important;
+            left: 0 !important;
+            transform: none !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            height: 100dvh !important;
+            border-radius: 0 !important;
+            border: none !important;
+            animation: fsModalInMobile 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+          }
+
+          .fs-header {
+            padding: 12px 16px !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 8px !important;
+          }
+
+          .fs-header-title-row {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            width: 100% !important;
+          }
+
+          .fs-header-controls-row {
+            display: block !important;
+            width: 100% !important;
+          }
+
+          .fs-title {
+            font-size: 16px !important;
+          }
+
+          .fs-subtitle {
+            display: none !important;
+          }
+
+          .fs-mobile-close-btn {
+            display: flex !important;
+          }
+
+          .fs-desktop-controls {
+            width: 100% !important;
+            justify-content: space-between !important;
+          }
+
+          .fs-desktop-close-btn {
+            display: none !important;
+          }
+
+          .fs-details-drawer {
+            top: auto !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 55dvh !important;
+            max-height: 55dvh !important;
+            transform: translateY(100%) !important;
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            border-radius: 20px 20px 0 0 !important;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2) !important;
+            overflow: hidden !important;
+            z-index: 99999 !important;
+          }
+
+          .fs-details-drawer.visible {
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+          }
+
+          .map-drag-wrapper.panel-active {
+            transform: translateY(-16dvh) !important;
+          }
         }
       `}</style>
     </>
