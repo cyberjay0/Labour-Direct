@@ -381,369 +381,282 @@ export default function Home() {
                 </h2>
               </div>
 
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: "24px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: "28px" }}>
                 {/* Education card */}
                 <div
-                  className="glass-card glass-card-glow"
+                  className="glass-card"
                   style={{
                     display: "flex",
                     flexDirection: "column",
+                    gap: "20px",
+                    padding: "36px 32px",
+                    borderRadius: "24px",
+                    border: "1px solid var(--card-border)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.8) 100%)",
+                    position: "relative",
                     overflow: "hidden",
                     height: "100%",
                   }}
                 >
-                  {/* Card Media Area */}
+                  {/* Subtle top accent line */}
+                  <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "4px", background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
+
+                  {/* Icon wrapper with hover animation */}
                   <div
+                    className="pillar-icon-wrapper"
                     style={{
-                      height: "200px",
-                      position: "relative",
-                      overflow: "hidden",
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "14px",
+                      backgroundColor: "rgba(10, 77, 47, 0.06)",
+                      border: "1px solid rgba(10, 77, 47, 0.12)",
                       display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      padding: "20px",
-                      color: "#ffffff",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--primary)",
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    <img
-                      src="/education_policy.png"
-                      alt="Education Sector Plan"
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        zIndex: 0,
-                        transition: "transform 0.5s ease",
-                      }}
-                      className="card-media-image"
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
-                        zIndex: 1,
-                      }}
-                    />
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          fontWeight: 700,
-                          backgroundColor: "rgba(255, 255, 255, 0.2)",
-                          padding: "4px 10px",
-                          borderRadius: "20px",
-                          backdropFilter: "blur(4px)",
-                          textTransform: "uppercase",
-                          fontFamily: "var(--font-jakarta), sans-serif",
-                        }}
-                      >
-                        Education
-                      </span>
-                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
-                    </div>
-                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
-                      <BookOpen size={96} />
-                    </div>
-                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
-                      Labour Direct Module
-                    </span>
+                    <BookOpen size={24} />
                   </div>
 
-                  {/* Card Content Area */}
-                  <div
-                    style={{
-                      padding: "24px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                      flexGrow: 1,
-                    }}
-                  >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1px", color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                      Sector Module 01
+                    </span>
                     <h3
                       style={{
                         fontFamily: "var(--font-playfair), serif",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        lineHeight: 1.3,
+                        fontSize: "22px",
+                        fontWeight: 800,
                         color: "var(--text-primary)",
+                        margin: 0,
                       }}
                     >
                       Education & Skills
                     </h3>
-                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                      Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
-                    </p>
-                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
-                      Labour Direct cross-references every school with access roads, power supply, and teacher deployment. Statewide. Automatically.
-                    </p>
+                  </div>
+
+                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                    Nigeria has 20 million out-of-school children. Not because we lack schools. Because the schools we have are not planned alongside roads, power, or staffing.
+                  </p>
+
+                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.6, flexGrow: 1 }}>
+                    Labour Direct cross-references every school with access roads, power supply, and teacher deployment. Statewide. Automatically.
+                  </p>
+
+                  <div style={{ borderTop: "1px solid rgba(0,0,0,0.04)", paddingTop: "16px", marginTop: "8px" }}>
                     <Link
                       href="/sectors?sector=education"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "6px",
-                        fontSize: "13px",
+                        fontSize: "13.5px",
                         fontWeight: 700,
                         color: "var(--primary)",
                         textDecoration: "none",
-                        marginTop: "8px",
                         fontFamily: "var(--font-jakarta), sans-serif",
+                        transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--primary-light)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(4px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--primary)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(0)";
+                      }}
                     >
-                      See the Education Plan <ArrowRight size={14} />
+                      See the Education Plan <ArrowRight size={14} style={{ transition: "transform 0.2s ease" }} />
                     </Link>
                   </div>
                 </div>
 
                 {/* Economy card */}
                 <div
-                  className="glass-card glass-card-glow"
+                  className="glass-card"
                   style={{
                     display: "flex",
                     flexDirection: "column",
+                    gap: "20px",
+                    padding: "36px 32px",
+                    borderRadius: "24px",
+                    border: "1px solid var(--card-border)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.8) 100%)",
+                    position: "relative",
                     overflow: "hidden",
                     height: "100%",
                   }}
                 >
-                  {/* Card Media Area */}
+                  {/* Subtle top accent line */}
+                  <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "4px", background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
+
+                  {/* Icon wrapper with hover animation */}
                   <div
+                    className="pillar-icon-wrapper"
                     style={{
-                      height: "200px",
-                      position: "relative",
-                      overflow: "hidden",
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "14px",
+                      backgroundColor: "rgba(10, 77, 47, 0.06)",
+                      border: "1px solid rgba(10, 77, 47, 0.12)",
                       display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      padding: "20px",
-                      color: "#ffffff",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--primary)",
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    <img
-                      src="/economy_policy.png"
-                      alt="Economy Sector Plan"
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        zIndex: 0,
-                        transition: "transform 0.5s ease",
-                      }}
-                      className="card-media-image"
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
-                        zIndex: 1,
-                      }}
-                    />
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          fontWeight: 700,
-                          backgroundColor: "rgba(255, 255, 255, 0.2)",
-                          padding: "4px 10px",
-                          borderRadius: "20px",
-                          backdropFilter: "blur(4px)",
-                          textTransform: "uppercase",
-                          fontFamily: "var(--font-jakarta), sans-serif",
-                        }}
-                      >
-                        Economy
-                      </span>
-                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
-                    </div>
-                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
-                      <TrendingUp size={96} />
-                    </div>
-                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
-                      Labour Direct Module
-                    </span>
+                    <TrendingUp size={24} />
                   </div>
 
-                  {/* Card Content Area */}
-                  <div
-                    style={{
-                      padding: "24px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                      flexGrow: 1,
-                    }}
-                  >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1px", color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                      Sector Module 02
+                    </span>
                     <h3
                       style={{
                         fontFamily: "var(--font-playfair), serif",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        lineHeight: 1.3,
+                        fontSize: "22px",
+                        fontWeight: 800,
                         color: "var(--text-primary)",
+                        margin: 0,
                       }}
                     >
                       Economy & Jobs
                     </h3>
-                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                      We set a minimum wage with no data on what it actually costs the national budget.
-                    </p>
-                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
-                      Labour Direct&apos;s budget engine shows instantly: N200k wage equals N1.4 trillion wage bill and a 3% inflation risk. Every sector affected, visible before the announcement.
-                    </p>
+                  </div>
+
+                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                    We set a minimum wage with no data on what it actually costs the national budget.
+                  </p>
+
+                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.6, flexGrow: 1 }}>
+                    Labour Direct&apos;s budget engine shows instantly: N200k wage equals N1.4 trillion wage bill and a 3% inflation risk. Every sector affected, visible before the announcement.
+                  </p>
+
+                  <div style={{ borderTop: "1px solid rgba(0,0,0,0.04)", paddingTop: "16px", marginTop: "8px" }}>
                     <Link
                       href="/sectors?sector=economy"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "6px",
-                        fontSize: "13px",
+                        fontSize: "13.5px",
                         fontWeight: 700,
                         color: "var(--primary)",
                         textDecoration: "none",
-                        marginTop: "8px",
                         fontFamily: "var(--font-jakarta), sans-serif",
+                        transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--primary-light)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(4px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--primary)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(0)";
+                      }}
                     >
-                      See the Economy Plan <ArrowRight size={14} />
+                      See the Economy Plan <ArrowRight size={14} style={{ transition: "transform 0.2s ease" }} />
                     </Link>
                   </div>
                 </div>
 
                 {/* Infrastructure card */}
                 <div
-                  className="glass-card glass-card-glow"
+                  className="glass-card"
                   style={{
                     display: "flex",
                     flexDirection: "column",
+                    gap: "20px",
+                    padding: "36px 32px",
+                    borderRadius: "24px",
+                    border: "1px solid var(--card-border)",
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.8) 100%)",
+                    position: "relative",
                     overflow: "hidden",
                     height: "100%",
                   }}
                 >
-                  {/* Card Media Area */}
+                  {/* Subtle top accent line */}
+                  <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "4px", background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
+
+                  {/* Icon wrapper with hover animation */}
                   <div
+                    className="pillar-icon-wrapper"
                     style={{
-                      height: "200px",
-                      position: "relative",
-                      overflow: "hidden",
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "14px",
+                      backgroundColor: "rgba(10, 77, 47, 0.06)",
+                      border: "1px solid rgba(10, 77, 47, 0.12)",
                       display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      padding: "20px",
-                      color: "#ffffff",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--primary)",
+                      transition: "all 0.3s ease",
                     }}
                   >
-                    <img
-                      src="/infrastructure_policy.png"
-                      alt="Infrastructure Sector Plan"
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        zIndex: 0,
-                        transition: "transform 0.5s ease",
-                      }}
-                      className="card-media-image"
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%)",
-                        zIndex: 1,
-                      }}
-                    />
-                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%", position: "relative", zIndex: 2 }}>
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          fontWeight: 700,
-                          backgroundColor: "rgba(255, 255, 255, 0.2)",
-                          padding: "4px 10px",
-                          borderRadius: "20px",
-                          backdropFilter: "blur(4px)",
-                          textTransform: "uppercase",
-                          fontFamily: "var(--font-jakarta), sans-serif",
-                        }}
-                      >
-                        Infrastructure
-                      </span>
-                      <span style={{ fontSize: "11px", fontWeight: 500, fontFamily: "var(--font-jakarta), sans-serif" }}>PLAN ENGINE</span>
-                    </div>
-                    <div style={{ opacity: 0.2, position: "absolute", right: "20px", bottom: "10px", zIndex: 2 }}>
-                      <Server size={96} />
-                    </div>
-                    <span style={{ fontSize: "12px", fontWeight: 600, opacity: 0.9, fontFamily: "var(--font-jakarta), sans-serif", position: "relative", zIndex: 2 }}>
-                      Labour Direct Module
-                    </span>
+                    <Server size={24} />
                   </div>
 
-                  {/* Card Content Area */}
-                  <div
-                    style={{
-                      padding: "24px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "12px",
-                      flexGrow: 1,
-                    }}
-                  >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1px", color: "var(--text-muted)", textTransform: "uppercase", fontFamily: "var(--font-jakarta), sans-serif" }}>
+                      Sector Module 03
+                    </span>
                     <h3
                       style={{
                         fontFamily: "var(--font-playfair), serif",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        lineHeight: 1.3,
+                        fontSize: "22px",
+                        fontWeight: 800,
                         color: "var(--text-primary)",
+                        margin: 0,
                       }}
                     >
                       Infrastructure & Energy
                     </h3>
-                    <p style={{ fontSize: "13px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.3 }}>
-                      Projects start. Contractors disappear. Nothing gets finished.
-                    </p>
-                    <p style={{ fontSize: "13.5px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.55, flexGrow: 1 }}>
-                      Every Labour Direct project has a digital lifecycle from procurement to delivery. Citizens upload photos. Site abandonment triggers automatic alerts to EFCC and BPP.
-                    </p>
+                  </div>
+
+                  <p style={{ fontSize: "14px", fontWeight: 700, color: "var(--brand-red)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.45 }}>
+                    Projects start. Contractors disappear. Nothing gets finished.
+                  </p>
+
+                  <p style={{ fontSize: "14px", color: "var(--text-secondary)", margin: 0, fontFamily: "var(--font-jakarta), sans-serif", lineHeight: 1.6, flexGrow: 1 }}>
+                    Every Labour Direct project has a digital lifecycle from procurement to delivery. Citizens upload photos. Site abandonment triggers automatic alerts to EFCC and BPP.
+                  </p>
+
+                  <div style={{ borderTop: "1px solid rgba(0,0,0,0.04)", paddingTop: "16px", marginTop: "8px" }}>
                     <Link
                       href="/sectors?sector=infrastructure"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
                         gap: "6px",
-                        fontSize: "13px",
+                        fontSize: "13.5px",
                         fontWeight: 700,
                         color: "var(--primary)",
                         textDecoration: "none",
-                        marginTop: "8px",
                         fontFamily: "var(--font-jakarta), sans-serif",
+                        transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary-light)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "var(--primary-light)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(4px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = "var(--primary)";
+                        const arrow = e.currentTarget.querySelector("svg");
+                        if (arrow) arrow.style.transform = "translateX(0)";
+                      }}
                     >
-                      See the Infrastructure Plan <ArrowRight size={14} />
+                      See the Infrastructure Plan <ArrowRight size={14} style={{ transition: "transform 0.2s ease" }} />
                     </Link>
                   </div>
                 </div>
