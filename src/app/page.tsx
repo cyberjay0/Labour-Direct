@@ -150,14 +150,10 @@ export default function Home() {
                 color: "var(--primary)",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "8px",
                 fontFamily: "var(--font-jakarta), sans-serif",
                 animationDelay: "100ms",
               }}
             >
-              <span
-                style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "var(--brand-red)" }}
-              />
               Government with GPS
             </span>
             <h1
@@ -172,7 +168,7 @@ export default function Home() {
               }}
             >
               Labour Direct Platform <br />
-              <span className="text-gradient-brand">
+              <span style={{ color: "var(--brand-red)" }}>
                 Ready on Day One
               </span>
             </h1>
@@ -206,51 +202,47 @@ export default function Home() {
               }}
             >
               <div style={{ minWidth: "80px" }}>
-                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>36</div>
+                <div style={{ fontSize: "28px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>36</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>States Engaged</div>
               </div>
               <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "20px", minWidth: "100px" }}>
-                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>100+</div>
+                <div style={{ fontSize: "28px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>100+</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>Planned Initiatives</div>
               </div>
               <div style={{ borderLeft: "1px solid var(--card-border)", paddingLeft: "20px", minWidth: "100px" }}>
-                <div className="text-gradient-brand" style={{ fontSize: "28px", fontWeight: 850, fontFamily: "var(--font-playfair), serif" }}>1</div>
+                <div style={{ fontSize: "28px", fontWeight: 800, fontFamily: "var(--font-playfair), serif", color: "var(--primary)" }}>1</div>
                 <div style={{ fontSize: "11px", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>Unified Movement</div>
               </div>
             </div>
 
-            {/* Value Props checklist */}
+            {/* Value Props — editorial dash list */}
             <div
               className="animate-fade-in-up"
               style={{
                 display: "flex",
-                flexWrap: "wrap",
-                gap: "16px",
+                flexDirection: "column",
+                gap: "8px",
                 marginTop: "4px",
                 marginBottom: "12px",
                 animationDelay: "450ms",
+                borderLeft: "3px solid var(--brand-red)",
+                paddingLeft: "16px",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
-                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more lost projects
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
-                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more conflicting plans
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "var(--text-secondary)", fontWeight: 600 }}>
-                <span style={{ color: "var(--brand-red)", fontSize: "16px" }}>✓</span> No more wasted years
-              </div>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more lost projects.</p>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more conflicting plans.</p>
+              <p style={{ fontSize: "13px", color: "var(--text-secondary)", fontWeight: 500, margin: 0, fontFamily: "var(--font-jakarta), sans-serif" }}>No more wasted years.</p>
             </div>
 
             <div 
               className="animate-fade-in-up"
               style={{ display: "flex", flexWrap: "wrap", gap: "16px", marginTop: "8px", animationDelay: "500ms" }}
             >
-              <Link href="/blog" className="btn-primary">
-                Read Our Latest Posts <ArrowRight size={18} />
+              <Link href="/plan" className="btn-primary">
+                Explore the Platform <ArrowRight size={18} />
               </Link>
               <Link href="/vision" className="btn-secondary">
-                View Our Vision Manifesto
+                Read the Vision
               </Link>
             </div>
           </div>
@@ -430,7 +422,7 @@ export default function Home() {
                   marginTop: "4px",
                 }}
               >
-                Latest <span className="text-gradient-brand">Articles & Updates</span>
+                Latest <span style={{ color: "var(--primary)" }}>Articles & Updates</span>
               </h2>
             </div>
             <Link
@@ -682,7 +674,7 @@ export default function Home() {
               }}
             >
               A Nationwide Movement <br />
-              <span className="text-gradient-brand">for Real Change</span>
+              <span style={{ color: "var(--brand-red)" }}>for Real Change</span>
             </h2>
             <p
               style={{
