@@ -212,12 +212,11 @@ export default function Map3D() {
     }
   };
 
-  const handleZoomIn = () => { const z = Math.min(zoomRef.current + 0.25, 2.5); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
-  const handleZoomOut = () => { const z = Math.max(zoomRef.current - 0.25, 0.6); setZoom(z); applyTransform(rotateXRef.current, rotateZRef.current, z); };
+  const handleZoomIn = () => { const z = Math.min(zoomRef.current + 0.25, 2.5); setZoom(z); };
+  const handleZoomOut = () => { const z = Math.max(zoomRef.current - 0.25, 0.6); setZoom(z); };
   const handleReset = () => {
     rotateXRef.current = 55; rotateZRef.current = -30;
     setZoom(1); setActiveFilter(null); closePanel();
-    applyTransform(55, -30, 1);
   };
 
   const filteredStates = Object.values(stateDatabase).filter((s) =>
@@ -378,7 +377,6 @@ export default function Map3D() {
         const delta = e.deltaY > 0 ? -0.1 : 0.1;
         const z = Math.min(Math.max(zoomRef.current + delta, 0.6), 3.0);
         setZoom(z);
-        applyTransform(rotateXRef.current, rotateZRef.current, z);
       }}
     >
       <div style={{
