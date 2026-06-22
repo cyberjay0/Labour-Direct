@@ -53,7 +53,8 @@ export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
     if (!heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -61,7 +62,8 @@ export default function Home() {
     setMousePos({ x, y });
   };
 
-  const handleMouseLeave = () => {
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return;
     setMousePos({ x: 0, y: 0 });
   };
 
@@ -94,8 +96,8 @@ export default function Home() {
       <section
         className="container bg-dot-grid"
         ref={heroRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
         style={{
           position: "relative",
           overflow: "hidden",
